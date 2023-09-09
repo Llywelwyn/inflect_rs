@@ -2006,3 +2006,85 @@ fn pl_prep() -> String {
 fn pl_sb_prep_dual_compound() -> String {
     return format!(r"(.*?)((?:-|\s+)(?:{})(?:-|\s+))a(?:-|\s+)(.*)", pl_prep());
 }
+
+fn singular_pronoun_genders() -> Vec<String> {
+    return vec![
+        "neuter",
+        "feminine",
+        "masculine",
+        "gender-neutral",
+        "feminine or masculine",
+        "masculine or feminine"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_pron_nom() -> HashMap<String, String> {
+    return vec![
+        ("i", "we"),
+        ("myself", "ourselves"),
+        ("you", "you"),
+        ("yourself", "yourselves"),
+        ("she", "they"),
+        ("herself", "themselves"),
+        ("he", "they"),
+        ("himself", "themselves"),
+        ("it", "they"),
+        ("itself", "themselves"),
+        ("they", "they"),
+        ("themself", "themselves"),
+        ("mine", "ours"),
+        ("yours", "yours"),
+        ("hers", "theirs"),
+        ("his", "theirs"),
+        ("its", "theirs"),
+        ("theirs", "theirs")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn pl_pron_acc() -> HashMap<String, String> {
+    return vec![
+        ("me", "us"),
+        ("myself", "ourselves"),
+        ("you", "you"),
+        ("yourself", "yourselves"),
+        ("her", "them"),
+        ("herself", "themselves"),
+        ("it", "them"),
+        ("itself", "themselves"),
+        ("them", "them"),
+        ("themself", "themselves")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn pl_pron_acc_keys() -> String {
+    return enclose(&pl_pron_acc().keys().cloned().collect::<Vec<String>>().join("|"));
+}
+
+fn pl_pron_acc_keys_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_pron_acc().keys().cloned().collect::<Vec<String>>());
+}
+
+fn si_pron() -> HashMap<String, HashMap<String, String>> {
+    let mut si_pron = HashMap::new();
+    let mut nom = HashMap::new();
+    for (k, v) in pl_pron_nom() {
+        nom.insert(k, v);
+    }
+    nom.insert("we".to_string(), "I".to_string());
+    let mut acc = HashMap::new();
+    for (k, v) in pl_pron_acc() {
+        acc.insert(k, v);
+    }
+    si_pron.insert("nom".to_string(), nom);
+    si_pron.insert("acc".to_string(), acc);
+    si_pron
+}
