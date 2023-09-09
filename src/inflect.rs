@@ -230,15 +230,15 @@ fn pl_sb_c_is_ides_list() -> Vec<String> {
 }
 
 fn si_sb_c_is_ides_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).0;
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), false).0;
 }
 
 fn si_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).1;
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), false).1;
 }
 
 fn pl_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).2;
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), false).2;
 }
 
 fn pl_sb_c_a_ata_list() -> Vec<String> {
@@ -274,19 +274,19 @@ fn pl_sb_c_a_ata_list() -> Vec<String> {
 }
 
 fn si_sb_c_a_ata_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).0;
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), true).0;
 }
 
 fn si_sb_c_a_ata_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).1;
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), true).1;
 }
 
 fn pl_sb_c_a_ata_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).2;
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), true).2;
 }
 
 fn pl_sb_c_a_ata() -> String {
-    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).3;
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), true).3;
 }
 
 fn pl_sb_u_a_ae_list() -> Vec<String> {
@@ -297,19 +297,19 @@ fn pl_sb_u_a_ae_list() -> Vec<String> {
 }
 
 fn si_sb_u_a_ae_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).0;
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, true).0;
 }
 
 fn si_sb_u_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).1;
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, true).1;
 }
 
 fn pl_sb_u_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).2;
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, true).2;
 }
 
 fn pl_sb_u_a_ae() -> String {
-    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).3;
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, true).3;
 }
 
 fn pl_sb_c_a_ae_list() -> Vec<String> {
@@ -336,19 +336,19 @@ fn pl_sb_c_a_ae_list() -> Vec<String> {
 }
 
 fn si_sb_c_a_ae_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).0;
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, true).0;
 }
 
 fn si_sb_c_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).1;
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, true).1;
 }
 
 fn pl_sb_c_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).2;
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, true).2;
 }
 
 fn pl_sb_c_a_ae() -> String {
-    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).3;
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, true).3;
 }
 
 fn pl_sb_c_en_ina_list() -> Vec<String> {
@@ -359,19 +359,19 @@ fn pl_sb_c_en_ina_list() -> Vec<String> {
 }
 
 fn si_sb_c_en_ina_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), true).0;
 }
 
 fn si_sb_c_en_ina_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), true).1;
 }
 
 fn pl_sb_c_en_ina_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), true).2;
 }
 
 fn pl_sb_c_en_ina() -> String {
-    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), true).3;
 }
 
 fn pl_sb_u_um_a_list() -> Vec<String> {
@@ -392,19 +392,19 @@ fn pl_sb_u_um_a_list() -> Vec<String> {
 }
 
 fn si_sb_u_um_a_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), true).0;
 }
 
 fn si_sb_u_um_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), true).1;
 }
 
 fn pl_sb_u_um_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), true).2;
 }
 
 fn pl_sb_u_um_a() -> String {
-    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), true).3;
 }
 
 fn pl_sb_c_um_a_list() -> Vec<String> {
@@ -446,19 +446,19 @@ fn pl_sb_c_um_a_list() -> Vec<String> {
 }
 
 fn si_sb_c_um_a_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), true).0;
 }
 
 fn si_sb_c_um_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), true).1;
 }
 
 fn pl_sb_c_um_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), true).2;
 }
 
 fn pl_sb_c_um_a() -> String {
-    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), true).3;
 }
 
 fn pl_sb_u_us_i_list() -> Vec<String> {
@@ -479,19 +479,19 @@ fn pl_sb_u_us_i_list() -> Vec<String> {
 }
 
 fn si_sb_u_us_i_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), true).0;
 }
 
 fn si_sb_u_us_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), true).1;
 }
 
 fn pl_sb_u_us_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), true).2;
 }
 
 fn pl_sb_u_us_i() -> String {
-    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), true).3;
 }
 
 fn pl_sb_c_us_i_list() -> Vec<String> {
@@ -517,19 +517,19 @@ fn pl_sb_c_us_i_list() -> Vec<String> {
 }
 
 fn si_sb_c_us_i_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), true).0;
 }
 
 fn si_sb_c_us_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), true).1;
 }
 
 fn pl_sb_c_us_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), true).2;
 }
 
 fn pl_sb_c_us_i() -> String {
-    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), true).3;
 }
 
 fn pl_sb_c_us_us() -> Vec<String> {
@@ -561,19 +561,19 @@ fn pl_sb_u_on_a_list() -> Vec<String> {
 }
 
 fn si_sb_u_on_a_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), true).0;
 }
 
 fn si_sb_u_on_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), true).1;
 }
 
 fn pl_sb_u_on_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), true).2;
 }
 
 fn pl_sb_u_on_a() -> String {
-    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), true).3;
 }
 
 fn pl_sb_c_on_a_list() -> Vec<String> {
@@ -584,19 +584,19 @@ fn pl_sb_c_on_a_list() -> Vec<String> {
 }
 
 fn si_sb_c_on_a_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), true).0;
 }
 
 fn si_sb_c_on_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), true).1;
 }
 
 fn pl_sb_c_on_a_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), true).2;
 }
 
 fn pl_sb_c_on_a() -> String {
-    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), true).3;
 }
 
 fn pl_sb_c_o_i() -> Vec<String> {
@@ -863,19 +863,19 @@ fn pl_sb_u_ch_chs_list() -> Vec<String> {
 }
 
 fn si_sb_u_ch_chs_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).0;
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, true).0;
 }
 
 fn si_sb_u_ch_chs_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).1;
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, true).1;
 }
 
 fn pl_sb_u_ch_chs_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).2;
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, true).2;
 }
 
 fn pl_sb_u_ch_chs() -> String {
-    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).3;
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, true).3;
 }
 
 fn pl_sb_u_ex_ices_list() -> Vec<String> {
@@ -886,19 +886,19 @@ fn pl_sb_u_ex_ices_list() -> Vec<String> {
 }
 
 fn si_sb_u_ex_ices_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), true).0;
 }
 
 fn si_sb_u_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), true).1;
 }
 
 fn pl_sb_u_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), true).2;
 }
 
 fn pl_sb_u_ex_ices() -> String {
-    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), true).3;
 }
 
 fn pl_sb_u_ix_ices_list() -> Vec<String> {
@@ -909,19 +909,19 @@ fn pl_sb_u_ix_ices_list() -> Vec<String> {
 }
 
 fn si_sb_u_ix_ices_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), true).0;
 }
 
 fn si_sb_u_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), true).1;
 }
 
 fn pl_sb_u_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), true).2;
 }
 
 fn pl_sb_u_ix_ices() -> String {
-    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), true).3;
 }
 
 fn pl_sb_c_ex_ices_list() -> Vec<String> {
@@ -932,19 +932,19 @@ fn pl_sb_c_ex_ices_list() -> Vec<String> {
 }
 
 fn si_sb_c_ex_ices_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), true).0;
 }
 
 fn si_sb_c_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), true).1;
 }
 
 fn pl_sb_c_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), true).2;
 }
 
 fn pl_sb_c_ex_ices() -> String {
-    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), true).3;
 }
 
 fn pl_sb_c_ix_ices_list() -> Vec<String> {
@@ -955,19 +955,19 @@ fn pl_sb_c_ix_ices_list() -> Vec<String> {
 }
 
 fn si_sb_c_ix_ices_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).0;
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), true).0;
 }
 
 fn si_sb_c_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).1;
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), true).1;
 }
 
 fn pl_sb_c_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).2;
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), true).2;
 }
 
 fn pl_sb_c_ix_ices() -> String {
-    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).3;
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), true).3;
 }
 
 fn pl_sb_c_i_list() -> Vec<String> {
@@ -978,19 +978,19 @@ fn pl_sb_c_i_list() -> Vec<String> {
 }
 
 fn si_sb_c_i_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).0;
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, true).0;
 }
 
 fn si_sb_c_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).1;
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, true).1;
 }
 
 fn pl_sb_c_i_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).2;
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, true).2;
 }
 
 fn pl_sb_c_i() -> String {
-    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).3;
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, true).3;
 }
 
 fn pl_sb_c_im_list() -> Vec<String> {
@@ -1001,17 +1001,88 @@ fn pl_sb_c_im_list() -> Vec<String> {
 }
 
 fn si_sb_c_im_list() -> Vec<String> {
-    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).0;
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, true).0;
 }
 
 fn si_sb_c_im_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).1;
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, true).1;
 }
 
 fn pl_sb_c_im_bysize() -> HashMap<usize, HashSet<String>> {
-    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).2;
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, true).2;
 }
 
 fn pl_sb_c_im() -> String {
-    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).3;
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, true).3;
+}
+
+fn pl_sb_u_man_mans_list() -> Vec<String> {
+    return vec![
+        "ataman",
+        "caiman",
+        "cayman",
+        "ceriman",
+        "desman",
+        "dolman",
+        "farman",
+        "harman",
+        "hetman",
+        "human",
+        "leman",
+        "ottoman",
+        "shaman",
+        "talisman"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_u_man_mans_caps_list() -> Vec<String> {
+    return vec![
+        "Alabaman",
+        "Bahaman",
+        "Burman",
+        "|German",
+        "Hiroshiman",
+        "Liman",
+        "Nakayaman",
+        "Norman",
+        "Oklahoman",
+        "Panaman",
+        "Roman",
+        "Selman",
+        "Sonaman",
+        "Tacoman",
+        "Yakiman",
+        "Yokohaman",
+        "Yuman"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_man_mans_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_man_mans_list(), "s", None, false).0;
+}
+
+fn si_sb_u_man_mans_caps_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_man_mans_caps_list(), "s", None, false).0;
+}
+
+fn si_sb_u_man_mans_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_man_mans_list(), "s", None, false).1;
+}
+
+fn si_sb_u_man_mans_caps_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_man_mans_caps_list(), "s", None, false).1;
+}
+
+fn pl_sb_u_man_mans_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_man_mans_list(), "s", None, false).2;
+}
+
+fn pl_sb_u_man_mans_caps_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_man_mans_caps_list(), "s", None, false).2;
 }
