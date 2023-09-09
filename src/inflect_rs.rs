@@ -2455,4 +2455,38 @@ fn mill() -> Vec<String> {
         .collect();
 }
 
-// fn def_classical()
+fn def_classical() -> HashMap<String, bool> {
+    return vec![
+        ("all", false),
+        ("zero", false),
+        ("herd", false),
+        ("names", true),
+        ("persons", false),
+        ("ancient", false)
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v))
+        .collect();
+}
+
+fn all_classical() -> HashMap<String, bool> {
+    return def_classical()
+        .iter()
+        .map(|(k, _)| (k.to_string(), true))
+        .collect();
+}
+
+fn no_classical() -> HashMap<String, bool> {
+    return def_classical()
+        .iter()
+        .map(|(k, _)| (k.to_string(), false))
+        .collect();
+}
+
+// TODO: May not need to be Option<bool>, or have the None case.
+fn string_to_constant() -> HashMap<String, Option<bool>> {
+    return vec![("True", Some(true)), ("False", Some(false)), ("None", None)]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v))
+        .collect();
+}
