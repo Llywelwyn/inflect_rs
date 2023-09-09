@@ -530,3 +530,70 @@ fn pl_sb_c_us_i_bysize() -> HashMap<usize, HashSet<String>> {
 fn pl_sb_c_us_i() -> String {
     return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).3;
 }
+
+fn pl_sb_c_us_us() -> Vec<String> {
+    return vec!["status", "apparatus", "prospectus", "sinus", "hiatus", "impetus", "plexus"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_c_us_us_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_sb_c_us_us());
+}
+
+fn pl_sb_u_on_a_list() -> Vec<String> {
+    return vec![
+        "criterion",
+        "perihelion",
+        "aphelion",
+        "phenomenon",
+        "prolegomenon",
+        "noumenon",
+        "organon",
+        "asyndeton",
+        "hyperbaton"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_on_a_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).0;
+}
+
+fn si_sb_u_on_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).1;
+}
+
+fn pl_sb_u_on_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).2;
+}
+
+fn pl_sb_u_on_a() -> String {
+    return make_pl_si_lists(pl_sb_u_on_a_list(), "a", Some(2), false).3;
+}
+
+fn pl_sb_c_on_a_list() -> Vec<String> {
+    return vec!["oxymoron"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_on_a_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).0;
+}
+
+fn si_sb_c_on_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).1;
+}
+
+fn pl_sb_c_on_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).2;
+}
+
+fn pl_sb_c_on_a() -> String {
+    return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).3;
+}
