@@ -459,3 +459,74 @@ fn pl_sb_c_um_a_bysize() -> HashMap<usize, HashSet<String>> {
 fn pl_sb_c_um_a() -> String {
     return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).3;
 }
+
+fn pl_sb_u_us_i_list() -> Vec<String> {
+    return vec![
+        "alumnus",
+        "alveolus",
+        "bacillus",
+        "bronchus",
+        "locus",
+        "nucleus",
+        "stimulus",
+        "meniscus",
+        "sarcophagus"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_us_i_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).0;
+}
+
+fn si_sb_u_us_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).1;
+}
+
+fn pl_sb_u_us_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).2;
+}
+
+fn pl_sb_u_us_i() -> String {
+    return make_pl_si_lists(pl_sb_u_us_i_list(), "i", Some(2), false).3;
+}
+
+fn pl_sb_c_us_i_list() -> Vec<String> {
+    return vec![
+        "focus",
+        "radius",
+        "genius",
+        "incubus",
+        "succubus",
+        "nimbus",
+        "fungus",
+        "nucleolus",
+        "stylus",
+        "torus",
+        "umbilicus",
+        "uterus",
+        "hippopotamus",
+        "cactus"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_us_i_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).0;
+}
+
+fn si_sb_c_us_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).1;
+}
+
+fn pl_sb_c_us_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).2;
+}
+
+fn pl_sb_c_us_i() -> String {
+    return make_pl_si_lists(pl_sb_c_us_i_list(), "i", Some(2), false).3;
+}
