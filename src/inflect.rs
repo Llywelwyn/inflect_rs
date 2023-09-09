@@ -60,7 +60,7 @@ pub fn make_pl_si_lists(
     }
 }
 
-fn pl_sb_irregular_s() -> HashMap<&'static str, &'static str> {
+fn pl_sb_irregular_s() -> HashMap<String, String> {
     return vec![
         ("corpus", "corpuses|corpora"),
         ("opus", "opuses|opera"),
@@ -71,12 +71,13 @@ fn pl_sb_irregular_s() -> HashMap<&'static str, &'static str> {
         ("atlas", "atlases|atlantes"),
         ("yes", "yeses")
     ]
-        .into_iter()
+        .iter()
+        .map(|(k, v)| (k.to_string(), v.to_string()))
         .collect();
 }
 
-fn pl_sb_irregular() -> HashMap<&'static str, &'static str> {
-    let mut pl_sb_irregular: HashMap<&str, &str> = vec![
+fn pl_sb_irregular() -> HashMap<String, String> {
+    let mut pl_sb_irregular: HashMap<String, String> = vec![
         ("child", "children"),
         ("chili", "chilis|chilies"),
         ("brother", "brothers|brethren"),
@@ -111,7 +112,8 @@ fn pl_sb_irregular() -> HashMap<&'static str, &'static str> {
         ("rom", "roma"),
         ("carmen", "carmina")
     ]
-        .into_iter()
+        .iter()
+        .map(|(k, v)| (k.to_string(), v.to_string()))
         .collect();
     pl_sb_irregular.extend(pl_sb_irregular_s());
     pl_sb_irregular
@@ -127,22 +129,23 @@ fn pl_sb_irregular_compound() -> HashMap<&'static str, &'static str> {
     return vec![("prima donna", "prima donnas|prime donne")].into_iter().collect();
 }
 
-fn si_sb_irregular() -> HashMap<&'static str, &'static str> {
-    let mut si_sb_irregular: HashMap<&str, &str> = pl_sb_irregular()
+fn si_sb_irregular() -> HashMap<String, String> {
+    let mut si_sb_irregular: HashMap<String, String> = pl_sb_irregular()
         .into_iter()
         .map(|(k, v)| (v, k))
         .collect();
     let mut keys_to_remove = Vec::new();
-    for &k in si_sb_irregular.keys() {
+    let keys: Vec<String> = si_sb_irregular.keys().cloned().collect();
+    for k in keys.iter() {
         if k.contains('|') {
             keys_to_remove.push(k);
         }
     }
     for k in keys_to_remove {
-        si_sb_irregular.remove(&k);
+        si_sb_irregular.remove(k);
         let (k1, k2) = k.split_once('|').unwrap();
-        si_sb_irregular.insert(k1, k);
-        si_sb_irregular.insert(k2, k);
+        si_sb_irregular.insert(k1.to_string(), k.clone());
+        si_sb_irregular.insert(k2.to_string(), k.clone());
     }
     si_sb_irregular
 }
@@ -1385,4 +1388,621 @@ fn pl_sb_singular_s() -> String {
             .map(|w| w.to_string())
     );
     return enclose(&concat.join("|"));
+}
+
+fn si_sb_ois_oi_case() -> Vec<String> {
+    return vec!["Bolshois", "Hanois"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_uses_use_case() -> Vec<String> {
+    return vec!["Betelgeuses", "Duses", "Meuses", "Syracuses", "Toulouses"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_use_uses() -> Vec<String> {
+    return vec![
+        "abuses",
+        "applauses",
+        "blouses",
+        "carouses",
+        "causes",
+        "chartreuses",
+        "clauses",
+        "contuses",
+        "douses",
+        "excuses",
+        "fuses",
+        "grouses",
+        "hypotenuses",
+        "masseuses",
+        "menopauses",
+        "misuses",
+        "muses",
+        "overuses",
+        "pauses",
+        "peruses",
+        "profuses",
+        "recluses",
+        "reuses",
+        "ruses",
+        "souses",
+        "spouses",
+        "suffuses",
+        "transfuses",
+        "uses"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ies_ie_case() -> Vec<String> {
+    return vec![
+        "Addies",
+        "Aggies",
+        "Allies",
+        "Amies",
+        "Angies",
+        "Annies",
+        "Annmaries",
+        "Archies",
+        "Arties",
+        "Aussies",
+        "Barbies",
+        "Barries",
+        "Basies",
+        "Bennies",
+        "Bernies",
+        "Berties",
+        "Bessies",
+        "Betties",
+        "Billies",
+        "Blondies",
+        "Bobbies",
+        "Bonnies",
+        "Bowies",
+        "Brandies",
+        "Bries",
+        "Brownies",
+        "Callies",
+        "Carnegies",
+        "Carries",
+        "Cassies",
+        "Charlies",
+        "Cheries",
+        "Christies",
+        "Connies",
+        "Curies",
+        "Dannies",
+        "Debbies",
+        "Dixies",
+        "Dollies",
+        "Donnies",
+        "Drambuies",
+        "Eddies",
+        "Effies",
+        "Ellies",
+        "Elsies",
+        "Eries",
+        "Ernies",
+        "Essies",
+        "Eugenies",
+        "Fannies",
+        "Flossies",
+        "Frankies",
+        "Freddies",
+        "Gillespies",
+        "Goldies",
+        "Gracies",
+        "Guthries",
+        "Hallies",
+        "Hatties",
+        "Hetties",
+        "Hollies",
+        "Jackies",
+        "Jamies",
+        "Janies",
+        "Jannies",
+        "Jeanies",
+        "Jeannies",
+        "Jennies",
+        "Jessies",
+        "Jimmies",
+        "Jodies",
+        "Johnies",
+        "Johnnies",
+        "Josies",
+        "Julies",
+        "Kalgoorlies",
+        "Kathies",
+        "Katies",
+        "Kellies",
+        "Kewpies",
+        "Kristies",
+        "Laramies",
+        "Lassies",
+        "Lauries",
+        "Leslies",
+        "Lessies",
+        "Lillies",
+        "Lizzies",
+        "Lonnies",
+        "Lories",
+        "Lorries",
+        "Lotties",
+        "Louies",
+        "Mackenzies",
+        "Maggies",
+        "Maisies",
+        "Mamies",
+        "Marcies",
+        "Margies",
+        "Maries",
+        "Marjories",
+        "Matties",
+        "McKenzies",
+        "Melanies",
+        "Mickies",
+        "Millies",
+        "Minnies",
+        "Mollies",
+        "Mounties",
+        "Nannies",
+        "Natalies",
+        "Nellies",
+        "Netties",
+        "Ollies",
+        "Ozzies",
+        "Pearlies",
+        "Pottawatomies",
+        "Reggies",
+        "Richies",
+        "Rickies",
+        "Robbies",
+        "Ronnies",
+        "Rosalies",
+        "Rosemaries",
+        "Rosies",
+        "Roxies",
+        "Rushdies",
+        "Ruthies",
+        "Sadies",
+        "Sallies",
+        "Sammies",
+        "Scotties",
+        "Selassies",
+        "Sherries",
+        "Sophies",
+        "Stacies",
+        "Stefanies",
+        "Stephanies",
+        "Stevies",
+        "Susies",
+        "Sylvies",
+        "Tammies",
+        "Terries",
+        "Tessies",
+        "Tommies",
+        "Tracies",
+        "Trekkies",
+        "Valaries",
+        "Valeries",
+        "Valkyries",
+        "Vickies",
+        "Virgies",
+        "Willies",
+        "Winnies",
+        "Wylies",
+        "Yorkies"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ies_ie() -> Vec<String> {
+    return vec![
+        "aeries",
+        "baggies",
+        "belies",
+        "biggies",
+        "birdies",
+        "bogies",
+        "bonnies",
+        "boogies",
+        "bookies",
+        "bourgeoisies",
+        "brownies",
+        "budgies",
+        "caddies",
+        "calories",
+        "camaraderies",
+        "cockamamies",
+        "collies",
+        "cookies",
+        "coolies",
+        "cooties",
+        "coteries",
+        "crappies",
+        "curies",
+        "cutesies",
+        "dogies",
+        "eyries",
+        "floozies",
+        "footsies",
+        "freebies",
+        "genies",
+        "goalies",
+        "groupies",
+        "hies",
+        "jalousies",
+        "junkies",
+        "kiddies",
+        "laddies",
+        "lassies",
+        "lies",
+        "lingeries",
+        "magpies",
+        "menageries",
+        "mommies",
+        "movies",
+        "neckties",
+        "newbies",
+        "nighties",
+        "oldies",
+        "organdies",
+        "overlies",
+        "pies",
+        "pinkies",
+        "pixies",
+        "potpies",
+        "prairies",
+        "quickies",
+        "reveries",
+        "rookies",
+        "rotisseries",
+        "softies",
+        "sorties",
+        "species",
+        "stymies",
+        "sweeties",
+        "ties",
+        "underlies",
+        "unties",
+        "veggies",
+        "vies",
+        "yuppies",
+        "zombies"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_oes_oe_case() -> Vec<String> {
+    return vec![
+        "Chloes",
+        "Crusoes",
+        "Defoes",
+        "Faeroes",
+        "Ivanhoes",
+        "Joes",
+        "McEnroes",
+        "Moes",
+        "Monroes",
+        "Noes",
+        "Poes",
+        "Roscoes",
+        "Tahoes",
+        "Tippecanoes",
+        "Zoes"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_oes_oe() -> Vec<String> {
+    return vec![
+        "aloes",
+        "backhoes",
+        "canoes",
+        "does",
+        "floes",
+        "foes",
+        "hoes",
+        "mistletoes",
+        "oboes",
+        "pekoes",
+        "roes",
+        "sloes",
+        "throes",
+        "tiptoes",
+        "toes",
+        "woes"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_z_zes() -> Vec<String> {
+    return vec!["quartzes", "topazes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_zzes_zz() -> Vec<String> {
+    return vec!["buzzes", "fizzes", "frizzes", "razzes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ches_che_case() -> Vec<String> {
+    return vec![
+        "Andromaches",
+        "Apaches",
+        "Blanches",
+        "Comanches",
+        "Nietzsches",
+        "Porsches",
+        "Roches"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ches_che() -> Vec<String> {
+    return vec![
+        "aches",
+        "avalanches",
+        "backaches",
+        "bellyaches",
+        "caches",
+        "cloches",
+        "creches",
+        "douches",
+        "earaches",
+        "fiches",
+        "headaches",
+        "heartaches",
+        "microfiches",
+        "niches",
+        "pastiches",
+        "psyches",
+        "quiches",
+        "stomachaches",
+        "toothaches",
+        "tranches"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_xes_xe() -> Vec<String> {
+    return vec!["annexes", "axes", "deluxes", "pickaxes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_sses_sse_case() -> Vec<String> {
+    return vec!["Hesses", "Jesses", "Larousses", "Matisses"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_sses_sse() -> Vec<String> {
+    return vec!["bouillabaisses", "crevasses", "demitasses", "impasses", "mousses", "posses"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ves_ve_case() -> Vec<String> {
+    return vec!["Clives", "Palmolives"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_ves_ve() -> Vec<String> {
+    return vec![
+        "interweaves",
+        "weaves",
+        "olives",
+        "bivalves",
+        "dissolves",
+        "resolves",
+        "salves",
+        "twelves",
+        "valves"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn plverb_special_s() -> String {
+    let mut concat: Vec<String> = Vec::new();
+    concat.push(pl_sb_singular_s());
+    concat.extend(pl_sb_uninflected_s());
+    let pl_sb_irregular_s_keys: Vec<String> = pl_sb_irregular_s().keys().cloned().collect();
+    concat.extend(pl_sb_irregular_s_keys);
+    concat.extend(
+        vec!["(.*[csx])is", "(.*)ceps", "[A-Z].*s"]
+            .iter()
+            .map(|s| s.to_string())
+    );
+    return enclose(&concat.join("|"));
+}
+
+fn _pl_sb_postfix_adj_defn() -> HashMap<String, String> {
+    let mut m = HashMap::new();
+    m.insert("general".to_string(), enclose(r"(?!major|lieutenant|brigadier|adjutant|.*star)\S+"));
+    m.insert("martial".to_string(), enclose("court"));
+    m.insert("force".to_string(), enclose("pound"));
+    m
+}
+
+fn pl_sb_postfix_adj() -> Vec<String> {
+    return _pl_sb_postfix_adj_defn()
+        .iter()
+        .map(|(k, v)| format!("{}(?=(?:-|\\s+){})", v, k))
+        .collect();
+}
+
+fn pl_sb_postfix_adj_stems() -> String {
+    return format!("({})(.*)", pl_sb_postfix_adj().join("|"));
+}
+
+fn si_sb_es_is() -> Vec<String> {
+    return vec![
+        "amanuenses",
+        "amniocenteses",
+        "analyses",
+        "antitheses",
+        "apotheoses",
+        "arterioscleroses",
+        "atheroscleroses",
+        "axes",
+        "catalyses",
+        "catharses",
+        "chasses",
+        "cirrhoses",
+        "cocces",
+        "crises",
+        "diagnoses",
+        "dialyses",
+        "diereses",
+        "electrolyses",
+        "emphases",
+        "exegeses",
+        "geneses",
+        "halitoses",
+        "hydrolyses",
+        "hypnoses",
+        "hypotheses",
+        "hystereses",
+        "metamorphoses",
+        "metastases",
+        "misdiagnoses",
+        "mitoses",
+        "mononucleoses",
+        "narcoses",
+        "necroses",
+        "nemeses",
+        "neuroses",
+        "oases",
+        "osmoses",
+        "osteoporoses",
+        "paralyses",
+        "parentheses",
+        "parthenogeneses",
+        "periphrases",
+        "photosyntheses",
+        "probosces",
+        "prognoses",
+        "prophylaxes",
+        "prostheses",
+        "preces",
+        "psoriases",
+        "psychoanalyses",
+        "psychokineses",
+        "psychoses",
+        "scleroses",
+        "scolioses",
+        "sepses",
+        "silicoses",
+        "symbioses",
+        "synopses",
+        "syntheses",
+        "taxes",
+        "telekineses",
+        "theses",
+        "thromboses",
+        "tuberculoses",
+        "urinalyses"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_prep_list() -> Vec<String> {
+    return vec![
+        "about",
+        "above",
+        "across",
+        "after",
+        "among",
+        "around",
+        "at",
+        "athwart",
+        "before",
+        "behind",
+        "below",
+        "beneath",
+        "beside",
+        "besides",
+        "between",
+        "betwixt",
+        "beyond",
+        "but",
+        "by",
+        "during",
+        "except",
+        "for",
+        "from",
+        "in",
+        "into",
+        "near",
+        "of",
+        "off",
+        "on",
+        "onto",
+        "out",
+        "over",
+        "since",
+        "till",
+        "to",
+        "under",
+        "until",
+        "unto",
+        "upon",
+        "with"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_prep_list_da() -> Vec<String> {
+    let mut concat = pl_prep_list();
+    concat.push("de".to_string());
+    concat.push("du".to_string());
+    concat.push("da".to_string());
+    return concat;
+}
+
+fn pl_prep_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_prep_list_da());
+}
+
+fn pl_prep() -> String {
+    return enclose(&pl_prep_list_da().join("|"));
+}
+
+fn pl_sb_prep_dual_compound() -> String {
+    return format!(r"(.*?)((?:-|\s+)(?:{})(?:-|\s+))a(?:-|\s+)(.*)", pl_prep());
 }
