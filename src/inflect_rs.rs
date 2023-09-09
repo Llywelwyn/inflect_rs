@@ -2345,3 +2345,112 @@ fn a_ordinal_a() -> Regex {
 fn a_ordinal_an() -> Regex {
     return Regex::new(r"^([bcdgjkpqtuvwyz]-?th)").expect("Failed to compile regex");
 }
+
+fn nth() -> HashMap<u32, String> {
+    return vec![
+        (0, "th"),
+        (1, "st"),
+        (2, "nd"),
+        (3, "rd"),
+        (4, "th"),
+        (5, "th"),
+        (6, "th"),
+        (7, "th"),
+        (8, "th"),
+        (9, "th"),
+        (11, "th"),
+        (12, "th"),
+        (13, "th")
+    ]
+        .iter()
+        .map(|&(k, v)| (k, v.to_string()))
+        .collect();
+}
+
+fn nth_suff() -> HashSet<String> {
+    return nth().values().cloned().collect();
+}
+
+fn ordinal() -> HashMap<String, String> {
+    return vec![
+        ("ty", "tieth"),
+        ("one", "first"),
+        ("two", "second"),
+        ("three", "third"),
+        ("five", "fifth"),
+        ("eight", "eighth"),
+        ("nine", "ninth"),
+        ("twelve", "twelfth")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+pub fn ordinal_suff() -> Regex {
+    let pattern = format!("({})", ordinal().keys().cloned().collect::<Vec<String>>().join("|"));
+    return Regex::new(&format!("{}\\z", pattern)).expect("Failed to compile regex");
+}
+
+fn unit() -> Vec<String> {
+    return vec!["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn teen() -> Vec<String> {
+    return vec![
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn ten() -> Vec<String> {
+    return vec![
+        "",
+        "",
+        "twenty",
+        "thirty",
+        "forty",
+        "fifty",
+        "sixty",
+        "seventy",
+        "eighty",
+        "ninety"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn mill() -> Vec<String> {
+    return vec![
+        " ",
+        " thousand",
+        " million",
+        " billion",
+        " trillion",
+        " quadrillion",
+        " quintillion",
+        " sextillion",
+        " septillion",
+        " octillion",
+        " nonillion",
+        " decillion"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
