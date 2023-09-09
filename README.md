@@ -1,1 +1,1 @@
-# inflect_rs
+# inflect
