@@ -221,3 +221,21 @@ fn pl_sb_c_is_ides() -> String {
         .collect();
     return joinstem(Some(-2), Some(pl_sb_c_is_ides));
 }
+
+fn pl_sb_c_is_ides_list() -> Vec<String> {
+    let mut pl_sb_c_is_ides_complete = pl_sb_c_is_ides_complete();
+    pl_sb_c_is_ides_complete.append(&mut pl_sb_c_is_ides_endings());
+    pl_sb_c_is_ides_complete
+}
+
+fn si_sb_c_is_ides_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).0;
+}
+
+fn si_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).1;
+}
+
+fn pl_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).2;
+}
