@@ -44,10 +44,10 @@ fn test_bysize() {
 
 #[test]
 fn test_si_pron() {
-    assert_eq!("him", get_si_pron("acc", "them", "masculine"));
-    assert_eq!("her", get_si_pron("acc", "them", "feminine"));
-    assert_eq!("it", get_si_pron("acc", "them", "neuter"));
-    assert_eq!("themselves", get_si_pron("acc", "itself", "themselves"));
-    assert_ne!("him", get_si_pron("acc", "them", "feminine"));
-    assert_ne!("her", get_si_pron("acc", "them", "masculine"));
+    assert_eq!("him", get_si_pron("acc", "them", Some("masculine")));
+    assert_eq!("her", get_si_pron("acc", "them", Some("feminine")));
+    assert_eq!("it", get_si_pron("acc", "them", Some("neuter")));
+    assert_eq!("themselves", get_si_pron("acc", "itself", None));
+    assert_ne!("him", get_si_pron("acc", "them", Some("feminine")));
+    assert_ne!("her", get_si_pron("acc", "them", Some("masculine")));
 }

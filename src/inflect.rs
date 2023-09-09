@@ -2136,12 +2136,12 @@ fn si_pron() -> HashMap<String, HashMap<String, HashMap<String, String>>> {
     si_pron
 }
 
-pub fn get_si_pron(thecase: &str, word: &str, gender: &str) -> String {
+pub fn get_si_pron(thecase: &str, word: &str, gender: Option<&str>) -> String {
     match si_pron().get(thecase) {
         Some(case) =>
             match case.get(word) {
                 Some(sing) =>
-                    match sing.get(gender) {
+                    match sing.get(gender.unwrap_or("N/A")) {
                         Some(specific) => specific.clone(),
                         None => sing.clone().values().next().unwrap().clone(),
                     }
