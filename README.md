@@ -1,6 +1,7 @@
 # inflect-rs
 
-![ci](https://github.com/Llywelwyn/inflect_rs/actions/workflows/cargo-build-test.yml/badge.svg)
+[![ci](https://github.com/Llywelwyn/inflect_rs/actions/workflows/cargo-build-test.yml/badge.svg)](https://github.com/Llywelwyn/inflect_rs/actions)
+[![crates.io](https://img.shields.io/crates/v/inflect-rs.svg)](https://crates.io/crates/inflect-rs)
 
 inflect-rs is a Rust port of the Python inflect library, used to generate plurals, ordinals, indefinite articles, and to convert numbers to words.
 
