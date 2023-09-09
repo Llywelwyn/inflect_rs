@@ -2073,18 +2073,80 @@ fn pl_pron_acc_keys_bysize() -> HashMap<usize, HashSet<String>> {
     return bysize(pl_pron_acc().keys().cloned().collect::<Vec<String>>());
 }
 
-fn si_pron() -> HashMap<String, HashMap<String, String>> {
-    let mut si_pron = HashMap::new();
-    let mut nom = HashMap::new();
+fn pron_tuples() -> Vec<(&'static str, &'static str, &'static str, &'static str)> {
+    return vec![
+        ("nom", "they", "neuter", "it"),
+        ("nom", "they", "feminine", "she"),
+        ("nom", "they", "masculine", "he"),
+        ("nom", "they", "gender-neutral", "they"),
+        ("nom", "they", "feminine or masculine", "she or he"),
+        ("nom", "they", "masculine or feminine", "he or she"),
+        ("nom", "themselves", "neuter", "itself"),
+        ("nom", "themselves", "feminine", "herself"),
+        ("nom", "themselves", "masculine", "himself"),
+        ("nom", "themselves", "gender-neutral", "themself"),
+        ("nom", "themselves", "feminine or masculine", "herself or himself"),
+        ("nom", "themselves", "masculine or feminine", "himself or herself"),
+        ("nom", "theirs", "neuter", "its"),
+        ("nom", "theirs", "feminine", "hers"),
+        ("nom", "theirs", "masculine", "his"),
+        ("nom", "theirs", "gender-neutral", "theirs"),
+        ("nom", "theirs", "feminine or masculine", "hers or his"),
+        ("nom", "theirs", "masculine or feminine", "his or hers"),
+        ("acc", "them", "neuter", "it"),
+        ("acc", "them", "feminine", "her"),
+        ("acc", "them", "masculine", "him"),
+        ("acc", "them", "gender-neutral", "them"),
+        ("acc", "them", "feminine or masculine", "her or him"),
+        ("acc", "them", "masculine or feminine", "him or her"),
+        ("acc", "themselves", "neuter", "itself"),
+        ("acc", "themselves", "feminine", "herself"),
+        ("acc", "themselves", "masculine", "himself"),
+        ("acc", "themselves", "gender-neutral", "themself"),
+        ("acc", "themselves", "feminine or masculine", "herself or himself"),
+        ("acc", "themselves", "masculine or feminine", "himself or herself")
+    ];
+}
+
+fn si_pron() -> HashMap<String, HashMap<String, HashMap<String, String>>> {
+    let mut si_pron: HashMap<String, HashMap<String, HashMap<String, String>>> = HashMap::new();
+    let mut nom: HashMap<String, HashMap<String, String>> = HashMap::new();
     for (k, v) in pl_pron_nom() {
-        nom.insert(k, v);
+        let mut entry = HashMap::new();
+        entry.insert(k.to_string(), v.to_string());
+        nom.insert(k.to_string(), entry);
     }
-    nom.insert("we".to_string(), "I".to_string());
-    let mut acc = HashMap::new();
+    //nom.insert("we".to_string(), "I".to_string());
+    let mut acc: HashMap<String, HashMap<String, String>> = HashMap::new();
     for (k, v) in pl_pron_acc() {
-        acc.insert(k, v);
+        let mut entry = HashMap::new();
+        entry.insert(k.to_string(), v.to_string());
+        acc.insert(k.to_string(), entry);
     }
     si_pron.insert("nom".to_string(), nom);
     si_pron.insert("acc".to_string(), acc);
+
+    for data in pron_tuples() {
+        let (this_case, this_plur, this_gend, this_sing) = data;
+        let case = si_pron.entry(this_case.to_string()).or_insert_with(HashMap::new);
+        let plur = case.entry(this_plur.to_string()).or_insert_with(HashMap::new);
+        plur.insert(this_gend.to_string(), this_sing.to_string());
+    }
+
     si_pron
+}
+
+pub fn get_si_pron(thecase: &str, word: &str, gender: &str) -> String {
+    match si_pron().get(thecase) {
+        Some(case) =>
+            match case.get(word) {
+                Some(sing) =>
+                    match sing.get(gender) {
+                        Some(specific) => specific.clone(),
+                        None => sing.clone().values().next().unwrap().clone(),
+                    }
+                None => panic!("No such case for word: {}", word),
+            }
+        None => panic!("No such case: {}", thecase),
+    }
 }

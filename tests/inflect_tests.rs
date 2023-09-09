@@ -41,3 +41,13 @@ fn test_bysize() {
         assert_eq!(sorted_words, vec!["horse"]);
     }
 }
+
+#[test]
+fn test_si_pron() {
+    assert_eq!("him", get_si_pron("acc", "them", "masculine"));
+    assert_eq!("her", get_si_pron("acc", "them", "feminine"));
+    assert_eq!("it", get_si_pron("acc", "them", "neuter"));
+    assert_eq!("themselves", get_si_pron("acc", "itself", "themselves"));
+    assert_ne!("him", get_si_pron("acc", "them", "feminine"));
+    assert_ne!("her", get_si_pron("acc", "them", "masculine"));
+}
