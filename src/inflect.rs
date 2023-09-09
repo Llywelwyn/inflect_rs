@@ -287,3 +287,175 @@ fn pl_sb_c_a_ata_bysize() -> HashMap<usize, HashSet<String>> {
 fn pl_sb_c_a_ata() -> String {
     return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).3;
 }
+
+fn pl_sb_u_a_ae_list() -> Vec<String> {
+    return vec!["alumna", "alga", "vertebra", "persona", "vita"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_a_ae_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).0;
+}
+
+fn si_sb_u_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).1;
+}
+
+fn pl_sb_u_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).2;
+}
+
+fn pl_sb_u_a_ae() -> String {
+    return make_pl_si_lists(pl_sb_u_a_ae_list(), "e", None, false).3;
+}
+
+fn pl_sb_c_a_ae_list() -> Vec<String> {
+    return vec![
+        "amoeba",
+        "antenna",
+        "formula",
+        "hyperbola",
+        "medusa",
+        "nebula",
+        "parabola",
+        "abscissa",
+        "hydra",
+        "nova",
+        "lacuna",
+        "aurora",
+        "umbra",
+        "flora",
+        "fauna"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_a_ae_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).0;
+}
+
+fn si_sb_c_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).1;
+}
+
+fn pl_sb_c_a_ae_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).2;
+}
+
+fn pl_sb_c_a_ae() -> String {
+    return make_pl_si_lists(pl_sb_c_a_ae_list(), "e", None, false).3;
+}
+
+fn pl_sb_c_en_ina_list() -> Vec<String> {
+    return vec!["stamen", "foramen", "lumen"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_en_ina_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).0;
+}
+
+fn si_sb_c_en_ina_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).1;
+}
+
+fn pl_sb_c_en_ina_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).2;
+}
+
+fn pl_sb_c_en_ina() -> String {
+    return make_pl_si_lists(pl_sb_c_en_ina_list(), "ina", Some(2), false).3;
+}
+
+fn pl_sb_u_um_a_list() -> Vec<String> {
+    return vec![
+        "bacterium",
+        "agendum",
+        "desideratum",
+        "erratum",
+        "stratum",
+        "datum",
+        "ovum",
+        "extremum",
+        "candelabrum"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_um_a_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).0;
+}
+
+fn si_sb_u_um_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).1;
+}
+
+fn pl_sb_u_um_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).2;
+}
+
+fn pl_sb_u_um_a() -> String {
+    return make_pl_si_lists(pl_sb_u_um_a_list(), "a", Some(2), false).3;
+}
+
+fn pl_sb_c_um_a_list() -> Vec<String> {
+    return vec![
+        "maximum",
+        "minimum",
+        "momentum",
+        "optimum",
+        "quantum",
+        "cranium",
+        "curriculum",
+        "dictum",
+        "phylum",
+        "aquarium",
+        "compendium",
+        "emporium",
+        "encomium",
+        "gymnasium",
+        "honorarium",
+        "interregnum",
+        "lustrum",
+        "memorandum",
+        "millennium",
+        "rostrum",
+        "spectrum",
+        "speculum",
+        "stadium",
+        "trapezium",
+        "ultimatum",
+        "medium",
+        "vacuum",
+        "velum",
+        "consortium",
+        "arboretum"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_um_a_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).0;
+}
+
+fn si_sb_c_um_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).1;
+}
+
+fn pl_sb_c_um_a_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).2;
+}
+
+fn pl_sb_c_um_a() -> String {
+    return make_pl_si_lists(pl_sb_c_um_a_list(), "a", Some(2), false).3;
+}
