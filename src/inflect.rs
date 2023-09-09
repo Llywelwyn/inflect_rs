@@ -211,13 +211,14 @@ fn pl_sb_c_is_ides_endings() -> Vec<String> {
 }
 
 fn pl_sb_c_is_ides() -> String {
-    let endings = pl_sb_c_is_ides_endings()
-        .into_iter()
-        .map(|w| format!(".*{}", w));
     let pl_sb_c_is_ides: Vec<String> = pl_sb_c_is_ides_complete()
         .iter()
         .map(|s| s.to_string())
-        .chain(endings)
+        .chain(
+            pl_sb_c_is_ides_endings()
+                .into_iter()
+                .map(|w| format!(".*{}", w))
+        )
         .collect();
     return joinstem(Some(-2), Some(pl_sb_c_is_ides));
 }
@@ -596,4 +597,421 @@ fn pl_sb_c_on_a_bysize() -> HashMap<usize, HashSet<String>> {
 
 fn pl_sb_c_on_a() -> String {
     return make_pl_si_lists(pl_sb_c_on_a_list(), "a", Some(2), false).3;
+}
+
+fn pl_sb_c_o_i() -> Vec<String> {
+    return vec!["solo", "soprano", "basso", "alto", "contralto", "tempo", "piano", "virtuoso"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_c_o_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_sb_c_o_i());
+}
+
+fn si_sb_c_o_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(
+        pl_sb_c_o_i()
+            .iter()
+            .map(|w| format!("{}i", &w[..w.len() - 1]))
+            .collect()
+    );
+}
+
+fn pl_sb_c_o_i_stems() -> String {
+    return joinstem(Some(-1), Some(pl_sb_c_o_i()));
+}
+
+fn pl_sb_u_o_os_complete() -> Vec<String> {
+    return vec!["ado", "ISO", "NATO", "NCO", "NGO", "oto"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_o_os_complete() -> Vec<String> {
+    return pl_sb_u_o_os_complete()
+        .iter()
+        .map(|w| format!("{}s", w))
+        .collect();
+}
+
+fn pl_sb_u_o_os_endings() -> Vec<String> {
+    let mut pl_sb_u_o_os_endings: Vec<String> = vec![
+        "aficionado",
+        "aggro",
+        "albino",
+        "allegro",
+        "ammo",
+        "Antananarivo",
+        "archipelago",
+        "armadillo",
+        "auto",
+        "avocado",
+        "Bamako",
+        "Barquisimeto",
+        "bimbo",
+        "bingo",
+        "Biro",
+        "bolero",
+        "Bolzano",
+        "bongo",
+        "Boto",
+        "burro",
+        "Cairo",
+        "canto",
+        "cappuccino",
+        "casino",
+        "cello",
+        "Chicago",
+        "Chimango",
+        "cilantro",
+        "cochito",
+        "coco",
+        "Colombo",
+        "Colorado",
+        "commando",
+        "concertino",
+        "contango",
+        "credo",
+        "crescendo",
+        "cyano",
+        "demo",
+        "ditto",
+        "Draco",
+        "dynamo",
+        "embryo",
+        "Esperanto",
+        "espresso",
+        "euro",
+        "falsetto",
+        "Faro",
+        "fiasco",
+        "Filipino",
+        "flamenco",
+        "furioso",
+        "generalissimo",
+        "Gestapo",
+        "ghetto",
+        "gigolo",
+        "gizmo",
+        "Greensboro",
+        "gringo",
+        "Guaiabero",
+        "guano",
+        "gumbo",
+        "gyro",
+        "hairdo",
+        "hippo",
+        "Idaho",
+        "impetigo",
+        "inferno",
+        "info",
+        "intermezzo",
+        "intertrigo",
+        "Iquico",
+        "jumbo",
+        "junto",
+        "Kakapo",
+        "kilo",
+        "Kinkimavo",
+        "Kokako",
+        "Kosovo",
+        "Lesotho",
+        "libero",
+        "libido",
+        "libretto",
+        "lido",
+        "Lilo",
+        "limbo",
+        "limo",
+        "lineno",
+        "lingo",
+        "lino",
+        "livedo",
+        "loco",
+        "logo",
+        "lumbago",
+        "macho",
+        "macro",
+        "mafioso",
+        "magneto",
+        "magnifico",
+        "Majuro",
+        "Malabo",
+        "manifesto",
+        "Maputo",
+        "Maracaibo",
+        "medico",
+        "memo",
+        "metro",
+        "Mexico",
+        "micro",
+        "Milano",
+        "Monaco",
+        "mono",
+        "Montenegro",
+        "Morocco",
+        "Muqdisho",
+        "myo",
+        "neutrino",
+        "Ningbo",
+        "octavo",
+        "oregano",
+        "Orinoco",
+        "Orlando",
+        "Oslo",
+        "panto",
+        "Paramaribo",
+        "Pardusco",
+        "pedalo",
+        "photo",
+        "pimento",
+        "pinto",
+        "pleco",
+        "Pluto",
+        "pogo",
+        "polo",
+        "poncho",
+        "Porto-Novo",
+        "Porto",
+        "pro",
+        "psycho",
+        "pueblo",
+        "quarto",
+        "Quito",
+        "repo",
+        "rhino",
+        "risotto",
+        "rococo",
+        "rondo",
+        "Sacramento",
+        "saddo",
+        "sago",
+        "salvo",
+        "Santiago",
+        "Sapporo",
+        "Sarajevo",
+        "scherzando",
+        "scherzo",
+        "silo",
+        "sirocco",
+        "sombrero",
+        "staccato",
+        "sterno",
+        "stucco",
+        "stylo",
+        "sumo",
+        "Taiko",
+        "techno",
+        "terrazzo",
+        "testudo",
+        "timpano",
+        "tiro",
+        "tobacco",
+        "Togo",
+        "Tokyo",
+        "torero",
+        "Torino",
+        "Toronto",
+        "torso",
+        "tremolo",
+        "typo",
+        "tyro",
+        "ufo",
+        "UNESCO",
+        "vaquero",
+        "vermicello",
+        "verso",
+        "vibrato",
+        "violoncello",
+        "Virgo",
+        "weirdo",
+        "WHO",
+        "WTO",
+        "Yamoussoukro",
+        "yo-yo",
+        "zero",
+        "Zibo"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+    pl_sb_u_o_os_endings.extend(pl_sb_c_o_i());
+    pl_sb_u_o_os_endings
+}
+
+fn pl_sb_u_o_os_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_sb_u_o_os_endings());
+}
+
+fn si_sb_u_o_os_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(
+        pl_sb_u_o_os_endings()
+            .iter()
+            .map(|w| format!("{}s", w))
+            .collect()
+    );
+}
+
+fn pl_sb_u_ch_chs_list() -> Vec<String> {
+    return vec!["czech", "eunuch", "stomach"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_ch_chs_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).0;
+}
+
+fn si_sb_u_ch_chs_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).1;
+}
+
+fn pl_sb_u_ch_chs_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).2;
+}
+
+fn pl_sb_u_ch_chs() -> String {
+    return make_pl_si_lists(pl_sb_u_ch_chs_list(), "s", None, false).3;
+}
+
+fn pl_sb_u_ex_ices_list() -> Vec<String> {
+    return vec!["codex", "murex", "silex"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_ex_ices_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).0;
+}
+
+fn si_sb_u_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).1;
+}
+
+fn pl_sb_u_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).2;
+}
+
+fn pl_sb_u_ex_ices() -> String {
+    return make_pl_si_lists(pl_sb_u_ex_ices_list(), "ices", Some(2), false).3;
+}
+
+fn pl_sb_u_ix_ices_list() -> Vec<String> {
+    return vec!["radix", "helix"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_ix_ices_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).0;
+}
+
+fn si_sb_u_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).1;
+}
+
+fn pl_sb_u_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).2;
+}
+
+fn pl_sb_u_ix_ices() -> String {
+    return make_pl_si_lists(pl_sb_u_ix_ices_list(), "ices", Some(2), false).3;
+}
+
+fn pl_sb_c_ex_ices_list() -> Vec<String> {
+    return vec!["vortex", "vertex", "cortex", "latex", "pontifex", "apex", "index", "simplex"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_ex_ices_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).0;
+}
+
+fn si_sb_c_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).1;
+}
+
+fn pl_sb_c_ex_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).2;
+}
+
+fn pl_sb_c_ex_ices() -> String {
+    return make_pl_si_lists(pl_sb_c_ex_ices_list(), "ices", Some(2), false).3;
+}
+
+fn pl_sb_c_ix_ices_list() -> Vec<String> {
+    return vec!["appendix"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_ix_ices_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).0;
+}
+
+fn si_sb_c_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).1;
+}
+
+fn pl_sb_c_ix_ices_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).2;
+}
+
+fn pl_sb_c_ix_ices() -> String {
+    return make_pl_si_lists(pl_sb_c_ix_ices_list(), "ices", Some(2), false).3;
+}
+
+fn pl_sb_c_i_list() -> Vec<String> {
+    return vec!["afreet", "afrit", "efreet"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_i_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).0;
+}
+
+fn si_sb_c_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).1;
+}
+
+fn pl_sb_c_i_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).2;
+}
+
+fn pl_sb_c_i() -> String {
+    return make_pl_si_lists(pl_sb_c_i_list(), "i", None, false).3;
+}
+
+fn pl_sb_c_im_list() -> Vec<String> {
+    return vec!["goy", "seraph", "cherub"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_im_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).0;
+}
+
+fn si_sb_c_im_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).1;
+}
+
+fn pl_sb_c_im_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).2;
+}
+
+fn pl_sb_c_im() -> String {
+    return make_pl_si_lists(pl_sb_c_im_list(), "im", None, false).3;
 }
