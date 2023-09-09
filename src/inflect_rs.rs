@@ -2315,3 +2315,33 @@ fn pl_adj_poss_keys() -> Regex {
     );
     return Regex::new(&pattern).expect("Failed to compile regex");
 }
+
+fn a_abbrev() -> Regex {
+    return Regex::new(
+        r"^(?:FJO|[HLMNS]Y\.|RY[EO]|SQU|(?:F[LR]?|[HL]|MN?|N|RH?|S[CHKLMNPTVW]?|X(?:YL)?) [AEIOU])[FHLMNRSX][A-Z]"
+    ).expect("Failed to compile regex");
+}
+
+fn a_y_cons() -> Regex {
+    return Regex::new(r"^(y(b[lor]|cl[ea]|fere|gg|p[ios]|rou|tt))").expect(
+        "Failed to compile regex"
+    );
+}
+
+fn a_explicit_a() -> Regex {
+    return Regex::new(r"^((?:unabomber|unanimous|US))").expect("Failed to compile regex");
+}
+
+fn a_explicit_an() -> Regex {
+    return Regex::new(r"^((?:euler|hour(?!i)|heir|honest|hono[ur]|mpeg))").expect(
+        "Failed to compile regex"
+    );
+}
+
+fn a_ordinal_a() -> Regex {
+    return Regex::new(r"^([aefhilmnorsx]-?th)").expect("Failed to compile regex");
+}
+
+fn a_ordinal_an() -> Regex {
+    return Regex::new(r"^([bcdgjkpqtuvwyz]-?th)").expect("Failed to compile regex");
+}
