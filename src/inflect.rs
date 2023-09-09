@@ -1086,3 +1086,303 @@ fn pl_sb_u_man_mans_bysize() -> HashMap<usize, HashSet<String>> {
 fn pl_sb_u_man_mans_caps_bysize() -> HashMap<usize, HashSet<String>> {
     return make_pl_si_lists(pl_sb_u_man_mans_caps_list(), "s", None, false).2;
 }
+
+fn pl_sb_u_louse_lice_list() -> Vec<String> {
+    return vec!["booklouse", "grapelouse", "louse", "woodlouse"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_u_louse_lice_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_u_louse_lice_list(), "lice", Some(5), false).0;
+}
+
+fn si_sb_u_louse_lice_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_louse_lice_list(), "lice", Some(5), false).1;
+}
+
+fn pl_sb_u_louse_lice_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_u_louse_lice_list(), "lice", Some(5), false).2;
+}
+
+fn pl_sb_uninflected_s_complete() -> Vec<String> {
+    return vec![
+        "breeches",
+        "britches",
+        "pajamas",
+        "pyjamas",
+        "clippers",
+        "gallows",
+        "hijinks",
+        "headquarters",
+        "pliers",
+        "scissors",
+        "testes",
+        "herpes",
+        "pincers",
+        "shears",
+        "proceedings",
+        "trousers",
+        "cantus",
+        "coitus",
+        "nexus",
+        "contretemps",
+        "corps",
+        "debris",
+        "siemens",
+        "mumps",
+        "diabetes",
+        "jackanapes",
+        "series",
+        "species",
+        "subspecies",
+        "rabies",
+        "chassis",
+        "innings",
+        "news",
+        "mews",
+        "haggis"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_uninflected_s_endings() -> Vec<String> {
+    return vec!["ois", "measles"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_uninflected_s() -> Vec<String> {
+    let mut pl_sb_uninflected_s = pl_sb_uninflected_s_complete();
+    pl_sb_uninflected_s.extend(
+        pl_sb_uninflected_s_endings()
+            .iter()
+            .map(|w| format!(".*{}", w))
+    );
+    pl_sb_uninflected_s
+}
+
+fn pl_sb_uninflected_herd() -> Vec<String> {
+    return vec![
+        "wildebeest",
+        "swine",
+        "eland",
+        "bison",
+        "buffalo",
+        "cattle",
+        "elk",
+        "rhinoceros",
+        "zucchini",
+        "caribou",
+        "dace",
+        "grouse",
+        "guinea fowl",
+        "guinea-fowl",
+        "haddock",
+        "hake",
+        "halibut",
+        "herring",
+        "mackerel",
+        "pickerel",
+        "pike",
+        "roe",
+        "seed",
+        "shad",
+        "snipe",
+        "teal",
+        "turbot",
+        "water fowl",
+        "water-fowl"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_uninflected_complete() -> Vec<String> {
+    return vec![
+        "tuna",
+        "salmon",
+        "mackerel",
+        "trout",
+        "bream",
+        "sea-bass",
+        "sea bass",
+        "carp",
+        "cod",
+        "flounder",
+        "whiting",
+        "moose",
+        "graffiti",
+        "djinn",
+        "samuri",
+        "offspring",
+        "pence",
+        "quid",
+        "hertz"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .chain(pl_sb_uninflected_complete())
+        .collect();
+}
+
+fn pl_sb_uninflected_caps() -> Vec<String> {
+    return vec![
+        "Portuguese",
+        "Amoyese",
+        "Borghese",
+        "Congoese",
+        "Faroese",
+        "Foochowese",
+        "Genevese",
+        "Genoese",
+        "Gilbertese",
+        "Hottentotese",
+        "Kiplingese",
+        "Kongoese",
+        "Lucchese",
+        "Maltese",
+        "Nankingese",
+        "Niasese",
+        "Pekingese",
+        "Piedmontese",
+        "Pistoiese",
+        "Sarawakese",
+        "Shavese",
+        "Vermontese",
+        "Wenchowese",
+        "Yengeese"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_uninflected_endings() -> Vec<String> {
+    return vec![
+        "butter",
+        "cash",
+        "furniture",
+        "information",
+        "fish",
+        "deer",
+        "sheep",
+        "nese",
+        "rese",
+        "lese",
+        "mese",
+        "pox",
+        "craft"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .chain(pl_sb_uninflected_s_endings())
+        .collect();
+}
+
+fn pl_sb_uninflected_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_sb_uninflected_endings());
+}
+
+fn pl_sb_singular_s_complete() -> Vec<String> {
+    return vec![
+        "acropolis",
+        "aegis",
+        "alias",
+        "asbestos",
+        "bathos",
+        "bias",
+        "bronchitis",
+        "bursitis",
+        "caddis",
+        "cannabis",
+        "canvas",
+        "chaos",
+        "cosmos",
+        "dais",
+        "digitalis",
+        "epidermis",
+        "ethos",
+        "eyas",
+        "gas",
+        "glottis",
+        "hubris",
+        "ibis",
+        "lens",
+        "mantis",
+        "marquis",
+        "metropolis",
+        "pathos",
+        "pelvis",
+        "polis",
+        "rhinoceros",
+        "sassafras",
+        "trellis"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .chain(pl_sb_c_is_ides_complete())
+        .collect();
+}
+
+fn pl_sb_singular_s_endings() -> Vec<String> {
+    return vec!["ss", "us"]
+        .iter()
+        .map(|s| s.to_string())
+        .chain(pl_sb_c_is_ides_endings())
+        .collect();
+}
+
+fn pl_sb_singular_s_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(pl_sb_singular_s_endings());
+}
+
+fn si_sb_singular_s_complete() -> Vec<String> {
+    return pl_sb_singular_s_complete()
+        .iter()
+        .map(|w| format!("{}es", w))
+        .collect();
+}
+
+fn si_sb_singular_s_endings() -> Vec<String> {
+    return pl_sb_singular_s_endings()
+        .iter()
+        .map(|w| format!("{}es", w))
+        .collect();
+}
+
+fn si_sb_singular_s_bysize() -> HashMap<usize, HashSet<String>> {
+    return bysize(si_sb_singular_s_endings());
+}
+
+fn pl_sb_singular_s_es() -> Vec<String> {
+    return vec!["[A-Z].*es"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_singular_s() -> String {
+    let mut concat: Vec<String> = Vec::new();
+    concat.extend(
+        pl_sb_singular_s_complete()
+            .iter()
+            .map(|w| w.to_string())
+    );
+    concat.extend(
+        pl_sb_singular_s_endings()
+            .iter()
+            .map(|w| format!(".*{}", w))
+    );
+    concat.extend(
+        pl_sb_singular_s_es()
+            .iter()
+            .map(|w| w.to_string())
+    );
+    return enclose(&concat.join("|"));
+}
