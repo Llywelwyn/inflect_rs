@@ -239,3 +239,51 @@ fn si_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
 fn pl_sb_c_is_ides_bysize() -> HashMap<usize, HashSet<String>> {
     return make_pl_si_lists(pl_sb_c_is_ides_list(), "ides", Some(2), true).2;
 }
+
+fn pl_sb_c_a_ata_list() -> Vec<String> {
+    return vec![
+        "anathema",
+        "bema",
+        "carcinoma",
+        "charisma",
+        "diploma",
+        "dogma",
+        "drama",
+        "edema",
+        "enema",
+        "enigma",
+        "lemma",
+        "lymphoma",
+        "magma",
+        "melisma",
+        "miasma",
+        "oedema",
+        "sarcoma",
+        "schema",
+        "soma",
+        "stigma",
+        "stoma",
+        "trauma",
+        "gumma",
+        "pragma"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn si_sb_c_a_ata_list() -> Vec<String> {
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).0;
+}
+
+fn si_sb_c_a_ata_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).1;
+}
+
+fn pl_sb_c_a_ata_bysize() -> HashMap<usize, HashSet<String>> {
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).2;
+}
+
+fn pl_sb_c_a_ata() -> String {
+    return make_pl_si_lists(pl_sb_c_a_ata_list(), "ata", Some(1), false).3;
+}
