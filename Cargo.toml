@@ -1,0 +1,16 @@
+[package]
+name = "inflect"
+version = "0.1.0"
+authors = ["Lewis Wynne <lewis@llyw.co.uk>"]
+edition = "2021"
+publish = false
+description = "inflect is a Rust port of the Python inflect library, used to generate plurals, ordinals, indefinite articles, and to convert numbers to words."
+homepage = "https://github.com/llywelwyn/inflect_rs"
+repository = "https://github.com/llywelwyn/inflect_rs"
+readme = "README.md"
+keywords = ["inflect", "plural", "ordinal", "pluralize", "formatting"]
+categories = ["text-processing", "value-formatting"]
+license = "MIT"
+
+[dependencies]
+regex = {version = "1.9.5"}
