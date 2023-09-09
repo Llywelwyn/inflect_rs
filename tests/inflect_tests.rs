@@ -8,17 +8,23 @@ fn test_enclose() {
 #[test]
 fn test_joinstem() {
     assert_eq!(
-        joinstem(Some(-2), Some(vec!["ephemeris", "iris", ".*itis"])),
+        joinstem(
+            Some(-2),
+            Some(vec!["ephemeris".to_string(), "iris".to_string(), ".*itis".to_string()])
+        ),
         "(?:ephemer|ir|.*it)"
     );
-    assert_eq!(joinstem(None, Some(vec!["ephemeris"])), "(?:ephemeris)");
+    assert_eq!(joinstem(None, Some(vec!["ephemeris".to_string()])), "(?:ephemeris)");
     assert_eq!(joinstem(Some(5), None), "(?:)");
     assert_eq!(joinstem(None, None), "(?:)");
 }
 
 #[test]
 fn test_bysize() {
-    let words = vec!["ant", "cat", "dog", "pig", "frog", "goat", "horse", "elephant"];
+    let words = vec!["ant", "cat", "dog", "pig", "frog", "goat", "horse", "elephant"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
     let result = bysize(words);
     if let Some(set) = result.get(&3) {
         let mut sorted_words: Vec<&String> = set.iter().collect();

@@ -6,7 +6,7 @@ pub fn enclose(s: &str) -> String {
 }
 
 /// Joins the stem of each word in 'words' into a string for Regex.
-pub fn joinstem(cutpoint: Option<i32>, words: Option<Vec<&str>>) -> String {
+pub fn joinstem(cutpoint: Option<i32>, words: Option<Vec<String>>) -> String {
     let words = words.unwrap_or_else(|| Vec::new());
     let stem = words
         .iter()
@@ -23,7 +23,7 @@ pub fn joinstem(cutpoint: Option<i32>, words: Option<Vec<&str>>) -> String {
 }
 
 /// From a list of words, returns a HashMap of HashSets of words, keyed by word length.
-pub fn bysize(words: Vec<&str>) -> HashMap<usize, HashSet<String>> {
+pub fn bysize(words: Vec<String>) -> HashMap<usize, HashSet<String>> {
     let mut res: HashMap<usize, HashSet<String>> = HashMap::new();
     for word in words {
         let len = word.len();
@@ -34,7 +34,7 @@ pub fn bysize(words: Vec<&str>) -> HashMap<usize, HashSet<String>> {
 }
 
 pub fn make_pl_si_lists(
-    list: Vec<&str>,
+    list: Vec<String>,
     pl_ending: &str,
     si_ending_size: Option<i32>,
     do_joinstem: bool
@@ -42,7 +42,7 @@ pub fn make_pl_si_lists(
     let si_ending_size = si_ending_size.map(|size| -size);
     let si_list: Vec<String> = list
         .iter()
-        .map(|&w| {
+        .map(|w| {
             if let Some(size) = si_ending_size {
                 format!("{}{}", &w[..w.len() - (size as usize)], pl_ending)
             } else {
@@ -51,12 +51,7 @@ pub fn make_pl_si_lists(
         })
         .collect();
     let pl_bysize = bysize(list.clone());
-    let si_bysize = bysize(
-        si_list
-            .iter()
-            .map(|s| s.as_str())
-            .collect()
-    );
+    let si_bysize = bysize(si_list.clone());
     if do_joinstem {
         let stem = joinstem(si_ending_size, Some(list));
         (si_list, si_bysize, pl_bysize, stem)
@@ -179,18 +174,50 @@ fn si_sb_irregular_compound() -> HashMap<&'static str, &'static str> {
     si_sb_irregular_compound
 }
 
-fn pl_sb_z_zes_list() -> Vec<&'static str> {
-    return vec!["quartz", "topaz"];
+fn pl_sb_z_zes_list() -> Vec<String> {
+    return vec!["quartz", "topaz"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
 }
 
 fn pl_sb_z_zes_bysize() -> HashMap<usize, HashSet<String>> {
     return bysize(pl_sb_z_zes_list());
 }
 
-fn sb_ze_zes_list() -> Vec<&'static str> {
-    return vec!["snooze"];
+fn sb_ze_zes_list() -> Vec<String> {
+    return vec!["snooze"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
 }
 
 fn sb_ze_zes_bysize() -> HashMap<usize, HashSet<String>> {
     return bysize(sb_ze_zes_list());
+}
+
+fn pl_sb_c_is_ides_complete() -> Vec<String> {
+    return vec!["ephemeris", "iris", "clitoris", "chrysalis", "epididymis"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_c_is_ides_endings() -> Vec<String> {
+    return vec!["itis"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_sb_c_is_ides() -> String {
+    let endings = pl_sb_c_is_ides_endings()
+        .into_iter()
+        .map(|w| format!(".*{}", w));
+    let pl_sb_c_is_ides: Vec<String> = pl_sb_c_is_ides_complete()
+        .iter()
+        .map(|s| s.to_string())
+        .chain(endings)
+        .collect();
+    return joinstem(Some(-2), Some(pl_sb_c_is_ides));
 }
