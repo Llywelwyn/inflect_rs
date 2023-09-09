@@ -1,4 +1,5 @@
 use std::collections::{ HashMap, HashSet };
+use regex::Regex;
 
 /// Encloses a string 's' in a non-capturing group.
 pub fn enclose(s: &str) -> String {
@@ -2149,4 +2150,168 @@ pub fn get_si_pron(thecase: &str, word: &str, gender: Option<&str>) -> String {
             }
         None => panic!("No such case: {}", thecase),
     }
+}
+
+fn plverb_irregular_pres() -> HashMap<String, String> {
+    return vec![
+        ("am", "are"),
+        ("are", "are"),
+        ("is", "are"),
+        ("was", "were"),
+        ("were", "were"),
+        ("have", "have"),
+        ("has", "have"),
+        ("do", "do"),
+        ("does", "do")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn plverb_ambiguous_pres() -> HashMap<String, String> {
+    return vec![
+        ("act", "act"),
+        ("acts", "act"),
+        ("blame", "blame"),
+        ("blames", "blame"),
+        ("can", "can"),
+        ("must", "must"),
+        ("fly", "fly"),
+        ("flies", "fly"),
+        ("copy", "copy"),
+        ("copies", "copy"),
+        ("drink", "drink"),
+        ("drinks", "drink"),
+        ("fight", "fight"),
+        ("fights", "fight"),
+        ("fire", "fire"),
+        ("fires", "fire"),
+        ("like", "like"),
+        ("likes", "like"),
+        ("look", "look"),
+        ("looks", "look"),
+        ("make", "make"),
+        ("makes", "make"),
+        ("reach", "reach"),
+        ("reaches", "reach"),
+        ("run", "run"),
+        ("runs", "run"),
+        ("sink", "sink"),
+        ("sinks", "sink"),
+        ("sleep", "sleep"),
+        ("sleeps", "sleep"),
+        ("view", "view"),
+        ("views", "view")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn plverb_ambiguous_pres_keys() -> Regex {
+    let pattern = format!(
+        r"^({})((\s.*)?)$",
+        enclose(&plverb_ambiguous_pres().keys().cloned().collect::<Vec<String>>().join("|"))
+    );
+    return Regex::new(&pattern).expect("Failed to compile regex");
+}
+
+fn plverb_irregular_non_pres() -> Vec<String> {
+    return vec![
+        "did",
+        "had",
+        "ate",
+        "made",
+        "put",
+        "spent",
+        "fought",
+        "sank",
+        "gave",
+        "sought",
+        "shall",
+        "could",
+        "ought",
+        "should"
+    ]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn plverb_ambiguous_non_pres() -> Regex {
+    let pattern = format!(r"^((?:thought|saw|bent|will|might|cut))((\s.*)?)$");
+    return Regex::new(&pattern).expect("Failed to compile regex");
+}
+
+fn pl_v_oes_oe() -> Vec<String> {
+    return vec!["canoes", "floes", "oboes", "roes", "throes", "woes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_v_oes_oe_endings_size4() -> Vec<String> {
+    return vec!["hoes", "toes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_v_oes_oe_endings_size5() -> Vec<String> {
+    return vec!["shoes"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_count_zero() -> Vec<String> {
+    return vec!["0", "no", "zero", "nil"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_count_one() -> Vec<String> {
+    return vec!["1", "a", "an", "one", "each", "every", "this", "that"]
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+}
+
+fn pl_adj_special() -> HashMap<String, String> {
+    return vec![("a", "some"), ("an", "some"), ("this", "these"), ("that", "those")]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn pl_adj_special_keys() -> Regex {
+    let pattern = format!(
+        r"^({})$",
+        enclose(&pl_adj_special().keys().cloned().collect::<Vec<String>>().join("|"))
+    );
+    return Regex::new(&pattern).expect("Failed to compile regex");
+}
+
+fn pl_adj_poss() -> HashMap<String, String> {
+    return vec![
+        ("my", "our"),
+        ("your", "your"),
+        ("its", "their"),
+        ("her", "their"),
+        ("his", "their"),
+        ("their", "their")
+    ]
+        .iter()
+        .map(|&(k, v)| (k.to_string(), v.to_string()))
+        .collect();
+}
+
+fn pl_adj_poss_keys() -> Regex {
+    let pattern = format!(
+        r"^({})$",
+        enclose(&pl_adj_poss().keys().cloned().collect::<Vec<String>>().join("|"))
+    );
+    return Regex::new(&pattern).expect("Failed to compile regex");
 }
