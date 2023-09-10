@@ -8,7 +8,7 @@ description = "inflect-rs is a Rust port of the Python inflect library, used to 
 homepage = "https://github.com/llywelwyn/inflect_rs"
 repository = "https://github.com/llywelwyn/inflect_rs"
 readme = "README.md"
-keywords = ["inflect", "plural", "ordinal", "pluralize", "formatting"]
+keywords = ["inflect", "plural", "ordinal", "pluralize", "formatting", "pronouns", "numbers-to-words"]
 categories = ["text-processing", "value-formatting"]
 license = "MIT"
 
