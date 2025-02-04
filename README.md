@@ -18,4 +18,4 @@ fn test_si_pron() {
 }
 ```
 
-inflect-rs is currently in-development, but is nearing completion, and so has been published for the sake of name-reservation. The first stable version should be here very soon.
+~~should be done soon~~ still workin on this but time is limited lol
