@@ -2572,4 +2572,44 @@ impl Engine {
     }
 
     pub fn check_gender(&self) -> &String { &self.the_gender }
+
+    fn get_count<T: Into<IntOrString>>(&self, count: Option<T>) -> i32 {
+       if count.is_none() {
+            if self.persistent_count.is_some() { 
+                return self.persistent_count.unwrap();
+            } else {
+                return 0;
+            }
+        }
+
+        let c = count.unwrap().into();
+        match c {
+            IntOrString::Int(n) => return n,
+            IntOrString::Str(s) => {
+                if pl_count_one().contains(&s) ||
+                    (*self.classical_dict.get("zero").unwrap_or(&false) && pl_count_zero().contains(&s.to_lowercase())) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        }
+    }
+}
+
+enum IntOrString {
+    Int(i32),
+    Str(String),
+}
+
+impl From<i32> for IntOrString {
+    fn from(n: i32) -> Self { IntOrString::Int(n) }
+}
+
+impl From<String> for IntOrString {
+    fn from(s: String) -> Self { IntOrString::Str(s) }
+}
+
+impl From<&str> for IntOrString {
+    fn from(s: &str) -> Self { IntOrString::Str(s.to_string()) }
 }
