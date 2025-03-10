@@ -2024,6 +2024,7 @@ fn singular_pronoun_genders() -> Vec<String> {
 
 fn pl_pron_nom() -> HashMap<String, String> {
     return vec![
+        // Nominative: Reflexive
         ("i", "we"),
         ("myself", "ourselves"),
         ("you", "you"),
@@ -2036,6 +2037,7 @@ fn pl_pron_nom() -> HashMap<String, String> {
         ("itself", "themselves"),
         ("they", "they"),
         ("themself", "themselves"),
+        // Possessive
         ("mine", "ours"),
         ("yours", "yours"),
         ("hers", "theirs"),
@@ -2489,4 +2491,85 @@ fn string_to_constant() -> HashMap<String, Option<bool>> {
         .iter()
         .map(|&(k, v)| (k.to_string(), v))
         .collect();
+}
+
+fn dollar_digits() -> Regex { Regex::new("\\$(\\d+)").expect("Failed to compile Regex") }
+
+// TODO: Pre-compiled REGEX objects, ln1950 @ og inflect
+
+pub struct Words {
+    pub lowered: String,
+    pub split_: Vec<String>,
+    pub first: String,
+    pub last: String
+}
+
+impl Words {
+    pub fn new(s: &str) -> Words {
+        let split: Vec<String> = s.split_whitespace().map(String::from).collect();
+        Words {
+            lowered: s.to_lowercase(),
+            split_: split.clone(),
+            first: split.get(0).cloned().unwrap_or_else(String::new),
+            last: split.last().cloned().unwrap_or_else(String::new)
+        }
+    }
+}
+
+struct Word(String);
+
+impl Word {
+    fn new(word: String) -> Result<Self, &'static str> {
+        if word.len() >= 1 {
+            Ok(Word(word))
+        } else {
+            Err("Word must be >= 1 chars long.")
+        }
+    }
+
+    fn get(&self) -> &str {
+        &self.0
+    }
+}
+
+pub struct Engine {
+    classical_dict: HashMap<String, bool>,
+    persistent_count: Option<i32>,
+    mill_count: i32,
+    pl_sb_user_defined: Vec<Option<Word>>,
+    pl_v_user_defined: Vec<Option<Word>>,
+    pl_adj_user_defined: Vec<Option<Word>>,
+    si_sb_user_defined: Vec<Option<Word>>,
+    a_a_user_defined: Vec<Option<Word>>,
+    the_gender: String,
+    _number_args: Option<HashMap<String, String>>,
+}
+
+impl Engine {
+    pub fn new() -> Engine {
+        Engine {
+            classical_dict: def_classical(),
+            persistent_count: None,
+            mill_count: 0,
+            pl_sb_user_defined: Vec::new(),
+            pl_v_user_defined: Vec::new(),
+            pl_adj_user_defined: Vec::new(),
+            si_sb_user_defined: Vec::new(),
+            a_a_user_defined: Vec::new(),
+            the_gender: "neuter".to_string(),
+            _number_args: None,
+        }
+    }
+
+    fn checkpat(self, pattern: Option<Word>) {
+        return;
+    }
+
+    pub fn gender(&mut self, gender: &str) {
+        if singular_pronoun_genders().contains(&String::from(gender)) {
+            self.the_gender = gender.to_string();
+        }
+    }
+
+    pub fn check_gender(&self) -> &String { &self.the_gender }
 }

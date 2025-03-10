@@ -53,3 +53,33 @@ fn test_si_pron() {
     assert_ne!("him", get_si_pron("acc", "them", Some("feminine")));
     assert_ne!("her", get_si_pron("acc", "them", Some("masculine")));
 }
+
+#[test]
+fn test_ordinal_suff() {
+    let pattern = "ty|one|two|three|five|eight|nine|twelve";
+    let re = ordinal_suff();
+    assert!(re.is_match(pattern));
+    assert!(re.find("one").is_some());
+    assert!(re.find("thre|e").is_none());
+    assert!(re.find("1").is_none());
+}
+
+#[test]
+fn test_words() {
+    let words = Words::new("A quick brown fox.");
+    assert_eq!(words.lowered, "a quick brown fox.");
+    assert_eq!(words.split_, vec!["A", "quick", "brown", "fox."]);
+    assert_eq!(words.first, "A");
+    assert_eq!(words.last, "fox.");
+}
+
+#[test]
+fn test_engine() {
+    let mut e = Engine::new();
+    assert_eq!(e.check_gender(), "neuter");
+    e.gender("masculine");
+    assert_eq!(e.check_gender(), "masculine");
+    e.gender("fff");
+    assert_ne!(e.check_gender(), "fff");
+    assert_eq!(e.check_gender(), "masculine");
+}
