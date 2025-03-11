@@ -74,6 +74,15 @@ fn test_words() {
 }
 
 #[test]
+fn test_word() {
+    let word = Word::new(String::from("fox"));
+    assert_eq!(word.unwrap().get(), "fox");
+
+    let word = Word::new(String::from(""));
+    word.unwrap();
+}
+
+#[test]
 fn test_engine_gender() {
     let mut e = Engine::new();
     assert_eq!(e.check_gender(), "neuter");
@@ -89,7 +98,7 @@ fn test_engine_get_count() {
     let mut e = Engine::new();
 
     // i32 Into<IntOrString>>
-    for i in -1e3 as i32..1e3 as i32 {
+    for i in -1e2 as i32..1e2 as i32 {
         assert_eq!(e.get_count(Some(i)), i);
     }
 

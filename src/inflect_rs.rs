@@ -2516,10 +2516,11 @@ impl Words {
     }
 }
 
-struct Word(String);
+// FIXME: This is terrible. Placeholder.
+pub struct Word(pub String);
 
 impl Word {
-    fn new(word: String) -> Result<Self, &'static str> {
+    pub fn new(word: String) -> Result<Self, &'static str> {
         if word.len() >= 1 {
             Ok(Word(word))
         } else {
@@ -2527,7 +2528,7 @@ impl Word {
         }
     }
 
-    fn get(&self) -> &str {
+    pub fn get(&self) -> &str {
         &self.0
     }
 }
