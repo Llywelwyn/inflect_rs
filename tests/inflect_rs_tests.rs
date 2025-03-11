@@ -74,7 +74,7 @@ fn test_words() {
 }
 
 #[test]
-fn test_engine() {
+fn test_engine_gender() {
     let mut e = Engine::new();
     assert_eq!(e.check_gender(), "neuter");
     e.gender("masculine");
@@ -82,4 +82,30 @@ fn test_engine() {
     e.gender("fff");
     assert_ne!(e.check_gender(), "fff");
     assert_eq!(e.check_gender(), "masculine");
+}
+
+#[test]
+fn test_engine_get_count() {
+    let mut e = Engine::new();
+
+    // i32 Into<IntOrString>>
+    for i in -1e3 as i32..1e3 as i32 {
+        assert_eq!(e.get_count(Some(i)), i);
+    }
+
+    // None cases
+    assert_eq!(e.get_count::<i32>(None), 0);
+    assert_eq!(e.get_count::<String>(None), 0);
+    assert_eq!(e.get_count::<&str>(None), 0);
+
+    // Strings
+    assert_eq!(e.get_count(Some("a".to_string())), 1);
+    assert_eq!(e.get_count(Some("nil")), 2);
+    assert_eq!(e.get_count(Some("some")), 2);
+
+    e.classical_dict = all_classical();
+    assert_eq!(e.get_count(Some("nil")), 1);
+
+    e.persistent_count = Some(3);
+    assert_eq!(e.get_count::<i32>(None), 3);
 }

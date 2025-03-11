@@ -2471,14 +2471,14 @@ fn def_classical() -> HashMap<String, bool> {
         .collect();
 }
 
-fn all_classical() -> HashMap<String, bool> {
+pub fn all_classical() -> HashMap<String, bool> {
     return def_classical()
         .iter()
         .map(|(k, _)| (k.to_string(), true))
         .collect();
 }
 
-fn no_classical() -> HashMap<String, bool> {
+pub fn no_classical() -> HashMap<String, bool> {
     return def_classical()
         .iter()
         .map(|(k, _)| (k.to_string(), false))
@@ -2533,8 +2533,8 @@ impl Word {
 }
 
 pub struct Engine {
-    classical_dict: HashMap<String, bool>,
-    persistent_count: Option<i32>,
+    pub classical_dict: HashMap<String, bool>,
+    pub persistent_count: Option<i32>,
     mill_count: i32,
     pl_sb_user_defined: Vec<Option<Word>>,
     pl_v_user_defined: Vec<Option<Word>>,
@@ -2573,7 +2573,7 @@ impl Engine {
 
     pub fn check_gender(&self) -> &String { &self.the_gender }
 
-    fn get_count<T: Into<IntOrString>>(&self, count: Option<T>) -> i32 {
+    pub fn get_count<T: Into<IntOrString>>(&self, count: Option<T>) -> i32 {
        if count.is_none() {
             if self.persistent_count.is_some() { 
                 return self.persistent_count.unwrap();
