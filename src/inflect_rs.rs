@@ -1,5 +1,5 @@
-use std::collections::{ HashMap, HashSet };
 use regex::Regex;
+use std::collections::{HashMap, HashSet};
 
 /// Encloses a string 's' in a non-capturing group.
 pub fn enclose(s: &str) -> String {
@@ -13,7 +13,11 @@ pub fn joinstem(cutpoint: Option<i32>, words: Option<Vec<String>>) -> String {
         .iter()
         .map(|w| {
             if let Some(c) = cutpoint {
-                if c < 0 { &w[..w.len() - (-c as usize)] } else { &w[..c as usize] }
+                if c < 0 {
+                    &w[..w.len() - (-c as usize)]
+                } else {
+                    &w[..c as usize]
+                }
             } else {
                 w
             }
@@ -38,8 +42,13 @@ pub fn make_pl_si_lists(
     list: Vec<String>,
     pl_ending: &str,
     si_ending_size: Option<i32>,
-    do_joinstem: bool
-) -> (Vec<String>, HashMap<usize, HashSet<String>>, HashMap<usize, HashSet<String>>, String) {
+    do_joinstem: bool,
+) -> (
+    Vec<String>,
+    HashMap<usize, HashSet<String>>,
+    HashMap<usize, HashSet<String>>,
+    String,
+) {
     let si_ending_size = si_ending_size.map(|size| -size);
     let si_list: Vec<String> = list
         .iter()
@@ -70,11 +79,11 @@ fn pl_sb_irregular_s() -> HashMap<String, String> {
         ("penis", "penises|penes"),
         ("testis", "testes"),
         ("atlas", "atlases|atlantes"),
-        ("yes", "yeses")
+        ("yes", "yeses"),
     ]
-        .iter()
-        .map(|(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn pl_sb_irregular() -> HashMap<String, String> {
@@ -111,30 +120,35 @@ fn pl_sb_irregular() -> HashMap<String, String> {
         ("mary", "maries"),
         ("talouse", "talouses"),
         ("rom", "roma"),
-        ("carmen", "carmina")
+        ("carmen", "carmina"),
     ]
-        .iter()
-        .map(|(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|(k, v)| (k.to_string(), v.to_string()))
+    .collect();
     pl_sb_irregular.extend(pl_sb_irregular_s());
     pl_sb_irregular
 }
 
 fn pl_sb_irregular_caps() -> HashMap<&'static str, &'static str> {
-    return vec![("Romany", "Romanies"), ("Jerry", "Jerrys"), ("Mary", "Marys"), ("Rom", "Roma")]
-        .into_iter()
-        .collect();
+    return vec![
+        ("Romany", "Romanies"),
+        ("Jerry", "Jerrys"),
+        ("Mary", "Marys"),
+        ("Rom", "Roma"),
+    ]
+    .into_iter()
+    .collect();
 }
 
 fn pl_sb_irregular_compound() -> HashMap<&'static str, &'static str> {
-    return vec![("prima donna", "prima donnas|prime donne")].into_iter().collect();
+    return vec![("prima donna", "prima donnas|prime donne")]
+        .into_iter()
+        .collect();
 }
 
 fn si_sb_irregular() -> HashMap<String, String> {
-    let mut si_sb_irregular: HashMap<String, String> = pl_sb_irregular()
-        .into_iter()
-        .map(|(k, v)| (v, k))
-        .collect();
+    let mut si_sb_irregular: HashMap<String, String> =
+        pl_sb_irregular().into_iter().map(|(k, v)| (v, k)).collect();
     let mut keys_to_remove = Vec::new();
     let keys: Vec<String> = si_sb_irregular.keys().cloned().collect();
     for k in keys.iter() {
@@ -190,10 +204,7 @@ fn pl_sb_z_zes_bysize() -> HashMap<usize, HashSet<String>> {
 }
 
 fn sb_ze_zes_list() -> Vec<String> {
-    return vec!["snooze"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["snooze"].iter().map(|s| s.to_string()).collect();
 }
 
 fn sb_ze_zes_bysize() -> HashMap<usize, HashSet<String>> {
@@ -208,10 +219,7 @@ fn pl_sb_c_is_ides_complete() -> Vec<String> {
 }
 
 fn pl_sb_c_is_ides_endings() -> Vec<String> {
-    return vec!["itis"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["itis"].iter().map(|s| s.to_string()).collect();
 }
 
 fn pl_sb_c_is_ides() -> String {
@@ -221,7 +229,7 @@ fn pl_sb_c_is_ides() -> String {
         .chain(
             pl_sb_c_is_ides_endings()
                 .into_iter()
-                .map(|w| format!(".*{}", w))
+                .map(|w| format!(".*{}", w)),
         )
         .collect();
     return joinstem(Some(-2), Some(pl_sb_c_is_ides));
@@ -270,11 +278,11 @@ fn pl_sb_c_a_ata_list() -> Vec<String> {
         "stoma",
         "trauma",
         "gumma",
-        "pragma"
+        "pragma",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_c_a_ata_list() -> Vec<String> {
@@ -332,11 +340,11 @@ fn pl_sb_c_a_ae_list() -> Vec<String> {
         "aurora",
         "umbra",
         "flora",
-        "fauna"
+        "fauna",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_c_a_ae_list() -> Vec<String> {
@@ -388,11 +396,11 @@ fn pl_sb_u_um_a_list() -> Vec<String> {
         "datum",
         "ovum",
         "extremum",
-        "candelabrum"
+        "candelabrum",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_u_um_a_list() -> Vec<String> {
@@ -442,11 +450,11 @@ fn pl_sb_c_um_a_list() -> Vec<String> {
         "vacuum",
         "velum",
         "consortium",
-        "arboretum"
+        "arboretum",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_c_um_a_list() -> Vec<String> {
@@ -475,11 +483,11 @@ fn pl_sb_u_us_i_list() -> Vec<String> {
         "nucleus",
         "stimulus",
         "meniscus",
-        "sarcophagus"
+        "sarcophagus",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_u_us_i_list() -> Vec<String> {
@@ -513,11 +521,11 @@ fn pl_sb_c_us_i_list() -> Vec<String> {
         "umbilicus",
         "uterus",
         "hippopotamus",
-        "cactus"
+        "cactus",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_c_us_i_list() -> Vec<String> {
@@ -537,10 +545,18 @@ fn pl_sb_c_us_i() -> String {
 }
 
 fn pl_sb_c_us_us() -> Vec<String> {
-    return vec!["status", "apparatus", "prospectus", "sinus", "hiatus", "impetus", "plexus"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec![
+        "status",
+        "apparatus",
+        "prospectus",
+        "sinus",
+        "hiatus",
+        "impetus",
+        "plexus",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_c_us_us_bysize() -> HashMap<usize, HashSet<String>> {
@@ -557,11 +573,11 @@ fn pl_sb_u_on_a_list() -> Vec<String> {
         "noumenon",
         "organon",
         "asyndeton",
-        "hyperbaton"
+        "hyperbaton",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_u_on_a_list() -> Vec<String> {
@@ -581,10 +597,7 @@ fn pl_sb_u_on_a() -> String {
 }
 
 fn pl_sb_c_on_a_list() -> Vec<String> {
-    return vec!["oxymoron"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["oxymoron"].iter().map(|s| s.to_string()).collect();
 }
 
 fn si_sb_c_on_a_list() -> Vec<String> {
@@ -604,10 +617,19 @@ fn pl_sb_c_on_a() -> String {
 }
 
 fn pl_sb_c_o_i() -> Vec<String> {
-    return vec!["solo", "soprano", "basso", "alto", "contralto", "tempo", "piano", "virtuoso"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec![
+        "solo",
+        "soprano",
+        "basso",
+        "alto",
+        "contralto",
+        "tempo",
+        "piano",
+        "virtuoso",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_c_o_i_bysize() -> HashMap<usize, HashSet<String>> {
@@ -619,7 +641,7 @@ fn si_sb_c_o_i_bysize() -> HashMap<usize, HashSet<String>> {
         pl_sb_c_o_i()
             .iter()
             .map(|w| format!("{}i", &w[..w.len() - 1]))
-            .collect()
+            .collect(),
     );
 }
 
@@ -837,11 +859,11 @@ fn pl_sb_u_o_os_endings() -> Vec<String> {
         "Yamoussoukro",
         "yo-yo",
         "zero",
-        "Zibo"
+        "Zibo",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
     pl_sb_u_o_os_endings.extend(pl_sb_c_o_i());
     pl_sb_u_o_os_endings
 }
@@ -855,7 +877,7 @@ fn si_sb_u_o_os_bysize() -> HashMap<usize, HashSet<String>> {
         pl_sb_u_o_os_endings()
             .iter()
             .map(|w| format!("{}s", w))
-            .collect()
+            .collect(),
     );
 }
 
@@ -929,10 +951,12 @@ fn pl_sb_u_ix_ices() -> String {
 }
 
 fn pl_sb_c_ex_ices_list() -> Vec<String> {
-    return vec!["vortex", "vertex", "cortex", "latex", "pontifex", "apex", "index", "simplex"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec![
+        "vortex", "vertex", "cortex", "latex", "pontifex", "apex", "index", "simplex",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_c_ex_ices_list() -> Vec<String> {
@@ -952,10 +976,7 @@ fn pl_sb_c_ex_ices() -> String {
 }
 
 fn pl_sb_c_ix_ices_list() -> Vec<String> {
-    return vec!["appendix"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["appendix"].iter().map(|s| s.to_string()).collect();
 }
 
 fn si_sb_c_ix_ices_list() -> Vec<String> {
@@ -1022,24 +1043,12 @@ fn pl_sb_c_im() -> String {
 
 fn pl_sb_u_man_mans_list() -> Vec<String> {
     return vec![
-        "ataman",
-        "caiman",
-        "cayman",
-        "ceriman",
-        "desman",
-        "dolman",
-        "farman",
-        "harman",
-        "hetman",
-        "human",
-        "leman",
-        "ottoman",
-        "shaman",
-        "talisman"
+        "ataman", "caiman", "cayman", "ceriman", "desman", "dolman", "farman", "harman", "hetman",
+        "human", "leman", "ottoman", "shaman", "talisman",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_u_man_mans_caps_list() -> Vec<String> {
@@ -1060,11 +1069,11 @@ fn pl_sb_u_man_mans_caps_list() -> Vec<String> {
         "Tacoman",
         "Yakiman",
         "Yokohaman",
-        "Yuman"
+        "Yuman",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_u_man_mans_list() -> Vec<String> {
@@ -1146,11 +1155,11 @@ fn pl_sb_uninflected_s_complete() -> Vec<String> {
         "innings",
         "news",
         "mews",
-        "haggis"
+        "haggis",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_uninflected_s_endings() -> Vec<String> {
@@ -1165,7 +1174,7 @@ fn pl_sb_uninflected_s() -> Vec<String> {
     pl_sb_uninflected_s.extend(
         pl_sb_uninflected_s_endings()
             .iter()
-            .map(|w| format!(".*{}", w))
+            .map(|w| format!(".*{}", w)),
     );
     pl_sb_uninflected_s
 }
@@ -1200,11 +1209,11 @@ fn pl_sb_uninflected_herd() -> Vec<String> {
         "teal",
         "turbot",
         "water fowl",
-        "water-fowl"
+        "water-fowl",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_uninflected_complete() -> Vec<String> {
@@ -1227,12 +1236,12 @@ fn pl_sb_uninflected_complete() -> Vec<String> {
         "offspring",
         "pence",
         "quid",
-        "hertz"
+        "hertz",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .chain(pl_sb_uninflected_complete())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .chain(pl_sb_uninflected_complete())
+    .collect();
 }
 
 fn pl_sb_uninflected_caps() -> Vec<String> {
@@ -1260,11 +1269,11 @@ fn pl_sb_uninflected_caps() -> Vec<String> {
         "Shavese",
         "Vermontese",
         "Wenchowese",
-        "Yengeese"
+        "Yengeese",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_sb_uninflected_endings() -> Vec<String> {
@@ -1281,12 +1290,12 @@ fn pl_sb_uninflected_endings() -> Vec<String> {
         "lese",
         "mese",
         "pox",
-        "craft"
+        "craft",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .chain(pl_sb_uninflected_s_endings())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .chain(pl_sb_uninflected_s_endings())
+    .collect();
 }
 
 fn pl_sb_uninflected_bysize() -> HashMap<usize, HashSet<String>> {
@@ -1326,12 +1335,12 @@ fn pl_sb_singular_s_complete() -> Vec<String> {
         "polis",
         "rhinoceros",
         "sassafras",
-        "trellis"
+        "trellis",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .chain(pl_sb_c_is_ides_complete())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .chain(pl_sb_c_is_ides_complete())
+    .collect();
 }
 
 fn pl_sb_singular_s_endings() -> Vec<String> {
@@ -1365,29 +1374,18 @@ fn si_sb_singular_s_bysize() -> HashMap<usize, HashSet<String>> {
 }
 
 fn pl_sb_singular_s_es() -> Vec<String> {
-    return vec!["[A-Z].*es"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["[A-Z].*es"].iter().map(|s| s.to_string()).collect();
 }
 
 fn pl_sb_singular_s() -> String {
     let mut concat: Vec<String> = Vec::new();
-    concat.extend(
-        pl_sb_singular_s_complete()
-            .iter()
-            .map(|w| w.to_string())
-    );
+    concat.extend(pl_sb_singular_s_complete().iter().map(|w| w.to_string()));
     concat.extend(
         pl_sb_singular_s_endings()
             .iter()
-            .map(|w| format!(".*{}", w))
+            .map(|w| format!(".*{}", w)),
     );
-    concat.extend(
-        pl_sb_singular_s_es()
-            .iter()
-            .map(|w| w.to_string())
-    );
+    concat.extend(pl_sb_singular_s_es().iter().map(|w| w.to_string()));
     return enclose(&concat.join("|"));
 }
 
@@ -1435,11 +1433,11 @@ fn si_sb_use_uses() -> Vec<String> {
         "spouses",
         "suffuses",
         "transfuses",
-        "uses"
+        "uses",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_ies_ie_case() -> Vec<String> {
@@ -1599,11 +1597,11 @@ fn si_sb_ies_ie_case() -> Vec<String> {
         "Willies",
         "Winnies",
         "Wylies",
-        "Yorkies"
+        "Yorkies",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_ies_ie() -> Vec<String> {
@@ -1678,11 +1676,11 @@ fn si_sb_ies_ie() -> Vec<String> {
         "veggies",
         "vies",
         "yuppies",
-        "zombies"
+        "zombies",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_oes_oe_case() -> Vec<String> {
@@ -1701,11 +1699,11 @@ fn si_sb_oes_oe_case() -> Vec<String> {
         "Roscoes",
         "Tahoes",
         "Tippecanoes",
-        "Zoes"
+        "Zoes",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_oes_oe() -> Vec<String> {
@@ -1725,11 +1723,11 @@ fn si_sb_oes_oe() -> Vec<String> {
         "throes",
         "tiptoes",
         "toes",
-        "woes"
+        "woes",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_z_zes() -> Vec<String> {
@@ -1754,11 +1752,11 @@ fn si_sb_ches_che_case() -> Vec<String> {
         "Comanches",
         "Nietzsches",
         "Porsches",
-        "Roches"
+        "Roches",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_ches_che() -> Vec<String> {
@@ -1782,11 +1780,11 @@ fn si_sb_ches_che() -> Vec<String> {
         "quiches",
         "stomachaches",
         "toothaches",
-        "tranches"
+        "tranches",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_xes_xe() -> Vec<String> {
@@ -1804,10 +1802,17 @@ fn si_sb_sses_sse_case() -> Vec<String> {
 }
 
 fn si_sb_sses_sse() -> Vec<String> {
-    return vec!["bouillabaisses", "crevasses", "demitasses", "impasses", "mousses", "posses"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec![
+        "bouillabaisses",
+        "crevasses",
+        "demitasses",
+        "impasses",
+        "mousses",
+        "posses",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn si_sb_ves_ve_case() -> Vec<String> {
@@ -1827,11 +1832,11 @@ fn si_sb_ves_ve() -> Vec<String> {
         "resolves",
         "salves",
         "twelves",
-        "valves"
+        "valves",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn plverb_special_s() -> String {
@@ -1843,14 +1848,17 @@ fn plverb_special_s() -> String {
     concat.extend(
         vec!["(.*[csx])is", "(.*)ceps", "[A-Z].*s"]
             .iter()
-            .map(|s| s.to_string())
+            .map(|s| s.to_string()),
     );
     return enclose(&concat.join("|"));
 }
 
 fn _pl_sb_postfix_adj_defn() -> HashMap<String, String> {
     let mut m = HashMap::new();
-    m.insert("general".to_string(), enclose(r"(?!major|lieutenant|brigadier|adjutant|.*star)\S+"));
+    m.insert(
+        "general".to_string(),
+        enclose(r"(?!major|lieutenant|brigadier|adjutant|.*star)\S+"),
+    );
     m.insert("martial".to_string(), enclose("court"));
     m.insert("force".to_string(), enclose("pound"));
     m
@@ -1933,59 +1941,23 @@ fn si_sb_es_is() -> Vec<String> {
         "theses",
         "thromboses",
         "tuberculoses",
-        "urinalyses"
+        "urinalyses",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_prep_list() -> Vec<String> {
     return vec![
-        "about",
-        "above",
-        "across",
-        "after",
-        "among",
-        "around",
-        "at",
-        "athwart",
-        "before",
-        "behind",
-        "below",
-        "beneath",
-        "beside",
-        "besides",
-        "between",
-        "betwixt",
-        "beyond",
-        "but",
-        "by",
-        "during",
-        "except",
-        "for",
-        "from",
-        "in",
-        "into",
-        "near",
-        "of",
-        "off",
-        "on",
-        "onto",
-        "out",
-        "over",
-        "since",
-        "till",
-        "to",
-        "under",
-        "until",
-        "unto",
-        "upon",
-        "with"
+        "about", "above", "across", "after", "among", "around", "at", "athwart", "before",
+        "behind", "below", "beneath", "beside", "besides", "between", "betwixt", "beyond", "but",
+        "by", "during", "except", "for", "from", "in", "into", "near", "of", "off", "on", "onto",
+        "out", "over", "since", "till", "to", "under", "until", "unto", "upon", "with",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_prep_list_da() -> Vec<String> {
@@ -2015,11 +1987,11 @@ fn singular_pronoun_genders() -> Vec<String> {
         "masculine",
         "gender-neutral",
         "feminine or masculine",
-        "masculine or feminine"
+        "masculine or feminine",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn pl_pron_nom() -> HashMap<String, String> {
@@ -2043,11 +2015,11 @@ fn pl_pron_nom() -> HashMap<String, String> {
         ("hers", "theirs"),
         ("his", "theirs"),
         ("its", "theirs"),
-        ("theirs", "theirs")
+        ("theirs", "theirs"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn pl_pron_acc() -> HashMap<String, String> {
@@ -2061,15 +2033,21 @@ fn pl_pron_acc() -> HashMap<String, String> {
         ("it", "them"),
         ("itself", "themselves"),
         ("them", "them"),
-        ("themself", "themselves")
+        ("themself", "themselves"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn pl_pron_acc_keys() -> String {
-    return enclose(&pl_pron_acc().keys().cloned().collect::<Vec<String>>().join("|"));
+    return enclose(
+        &pl_pron_acc()
+            .keys()
+            .cloned()
+            .collect::<Vec<String>>()
+            .join("|"),
+    );
 }
 
 fn pl_pron_acc_keys_bysize() -> HashMap<usize, HashSet<String>> {
@@ -2088,8 +2066,18 @@ fn pron_tuples() -> Vec<(&'static str, &'static str, &'static str, &'static str)
         ("nom", "themselves", "feminine", "herself"),
         ("nom", "themselves", "masculine", "himself"),
         ("nom", "themselves", "gender-neutral", "themself"),
-        ("nom", "themselves", "feminine or masculine", "herself or himself"),
-        ("nom", "themselves", "masculine or feminine", "himself or herself"),
+        (
+            "nom",
+            "themselves",
+            "feminine or masculine",
+            "herself or himself",
+        ),
+        (
+            "nom",
+            "themselves",
+            "masculine or feminine",
+            "himself or herself",
+        ),
         ("nom", "theirs", "neuter", "its"),
         ("nom", "theirs", "feminine", "hers"),
         ("nom", "theirs", "masculine", "his"),
@@ -2106,8 +2094,18 @@ fn pron_tuples() -> Vec<(&'static str, &'static str, &'static str, &'static str)
         ("acc", "themselves", "feminine", "herself"),
         ("acc", "themselves", "masculine", "himself"),
         ("acc", "themselves", "gender-neutral", "themself"),
-        ("acc", "themselves", "feminine or masculine", "herself or himself"),
-        ("acc", "themselves", "masculine or feminine", "himself or herself")
+        (
+            "acc",
+            "themselves",
+            "feminine or masculine",
+            "herself or himself",
+        ),
+        (
+            "acc",
+            "themselves",
+            "masculine or feminine",
+            "himself or herself",
+        ),
     ];
 }
 
@@ -2131,8 +2129,12 @@ fn si_pron() -> HashMap<String, HashMap<String, HashMap<String, String>>> {
 
     for data in pron_tuples() {
         let (this_case, this_plur, this_gend, this_sing) = data;
-        let case = si_pron.entry(this_case.to_string()).or_insert_with(HashMap::new);
-        let plur = case.entry(this_plur.to_string()).or_insert_with(HashMap::new);
+        let case = si_pron
+            .entry(this_case.to_string())
+            .or_insert_with(HashMap::new);
+        let plur = case
+            .entry(this_plur.to_string())
+            .or_insert_with(HashMap::new);
         plur.insert(this_gend.to_string(), this_sing.to_string());
     }
 
@@ -2141,15 +2143,13 @@ fn si_pron() -> HashMap<String, HashMap<String, HashMap<String, String>>> {
 
 pub fn get_si_pron(thecase: &str, word: &str, gender: Option<&str>) -> String {
     match si_pron().get(thecase) {
-        Some(case) =>
-            match case.get(word) {
-                Some(sing) =>
-                    match sing.get(gender.unwrap_or("N/A")) {
-                        Some(specific) => specific.clone(),
-                        None => sing.clone().values().next().unwrap().clone(),
-                    }
-                None => panic!("No such case for word: {}", word),
-            }
+        Some(case) => match case.get(word) {
+            Some(sing) => match sing.get(gender.unwrap_or("N/A")) {
+                Some(specific) => specific.clone(),
+                None => sing.clone().values().next().unwrap().clone(),
+            },
+            None => panic!("No such case for word: {}", word),
+        },
         None => panic!("No such case: {}", thecase),
     }
 }
@@ -2164,11 +2164,11 @@ fn plverb_irregular_pres() -> HashMap<String, String> {
         ("have", "have"),
         ("has", "have"),
         ("do", "do"),
-        ("does", "do")
+        ("does", "do"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn plverb_ambiguous_pres() -> HashMap<String, String> {
@@ -2204,41 +2204,35 @@ fn plverb_ambiguous_pres() -> HashMap<String, String> {
         ("sleep", "sleep"),
         ("sleeps", "sleep"),
         ("view", "view"),
-        ("views", "view")
+        ("views", "view"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn plverb_ambiguous_pres_keys() -> Regex {
     let pattern = format!(
         r"^({})((\s.*)?)$",
-        enclose(&plverb_ambiguous_pres().keys().cloned().collect::<Vec<String>>().join("|"))
+        enclose(
+            &plverb_ambiguous_pres()
+                .keys()
+                .cloned()
+                .collect::<Vec<String>>()
+                .join("|")
+        )
     );
     return Regex::new(&pattern).expect("Failed to compile regex");
 }
 
 fn plverb_irregular_non_pres() -> Vec<String> {
     return vec![
-        "did",
-        "had",
-        "ate",
-        "made",
-        "put",
-        "spent",
-        "fought",
-        "sank",
-        "gave",
-        "sought",
-        "shall",
-        "could",
-        "ought",
-        "should"
+        "did", "had", "ate", "made", "put", "spent", "fought", "sank", "gave", "sought", "shall",
+        "could", "ought", "should",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn plverb_ambiguous_non_pres() -> Regex {
@@ -2254,17 +2248,11 @@ fn pl_v_oes_oe() -> Vec<String> {
 }
 
 fn pl_v_oes_oe_endings_size4() -> Vec<String> {
-    return vec!["hoes", "toes"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["hoes", "toes"].iter().map(|s| s.to_string()).collect();
 }
 
 fn pl_v_oes_oe_endings_size5() -> Vec<String> {
-    return vec!["shoes"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec!["shoes"].iter().map(|s| s.to_string()).collect();
 }
 
 fn pl_count_zero() -> Vec<String> {
@@ -2282,16 +2270,27 @@ fn pl_count_one() -> Vec<String> {
 }
 
 fn pl_adj_special() -> HashMap<String, String> {
-    return vec![("a", "some"), ("an", "some"), ("this", "these"), ("that", "those")]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    return vec![
+        ("a", "some"),
+        ("an", "some"),
+        ("this", "these"),
+        ("that", "those"),
+    ]
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn pl_adj_special_keys() -> Regex {
     let pattern = format!(
         r"^({})$",
-        enclose(&pl_adj_special().keys().cloned().collect::<Vec<String>>().join("|"))
+        enclose(
+            &pl_adj_special()
+                .keys()
+                .cloned()
+                .collect::<Vec<String>>()
+                .join("|")
+        )
     );
     return Regex::new(&pattern).expect("Failed to compile regex");
 }
@@ -2303,17 +2302,23 @@ fn pl_adj_poss() -> HashMap<String, String> {
         ("its", "their"),
         ("her", "their"),
         ("his", "their"),
-        ("their", "their")
+        ("their", "their"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 fn pl_adj_poss_keys() -> Regex {
     let pattern = format!(
         r"^({})$",
-        enclose(&pl_adj_poss().keys().cloned().collect::<Vec<String>>().join("|"))
+        enclose(
+            &pl_adj_poss()
+                .keys()
+                .cloned()
+                .collect::<Vec<String>>()
+                .join("|")
+        )
     );
     return Regex::new(&pattern).expect("Failed to compile regex");
 }
@@ -2325,9 +2330,8 @@ fn a_abbrev() -> Regex {
 }
 
 fn a_y_cons() -> Regex {
-    return Regex::new(r"^(y(b[lor]|cl[ea]|fere|gg|p[ios]|rou|tt))").expect(
-        "Failed to compile regex"
-    );
+    return Regex::new(r"^(y(b[lor]|cl[ea]|fere|gg|p[ios]|rou|tt))")
+        .expect("Failed to compile regex");
 }
 
 fn a_explicit_a() -> Regex {
@@ -2335,9 +2339,8 @@ fn a_explicit_a() -> Regex {
 }
 
 fn a_explicit_an() -> Regex {
-    return Regex::new(r"^((?:euler|hour(?!i)|heir|honest|hono[ur]|mpeg))").expect(
-        "Failed to compile regex"
-    );
+    return Regex::new(r"^((?:euler|hour(?!i)|heir|honest|hono[ur]|mpeg))")
+        .expect("Failed to compile regex");
 }
 
 fn a_ordinal_a() -> Regex {
@@ -2362,11 +2365,11 @@ fn nth() -> HashMap<u32, String> {
         (9, "th"),
         (11, "th"),
         (12, "th"),
-        (13, "th")
+        (13, "th"),
     ]
-        .iter()
-        .map(|&(k, v)| (k, v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k, v.to_string()))
+    .collect();
 }
 
 fn nth_suff() -> HashSet<String> {
@@ -2382,23 +2385,28 @@ fn ordinal() -> HashMap<String, String> {
         ("five", "fifth"),
         ("eight", "eighth"),
         ("nine", "ninth"),
-        ("twelve", "twelfth")
+        ("twelve", "twelfth"),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v.to_string()))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v.to_string()))
+    .collect();
 }
 
 pub fn ordinal_suff() -> Regex {
-    let pattern = format!("({})", ordinal().keys().cloned().collect::<Vec<String>>().join("|"));
+    let pattern = format!(
+        "({})",
+        ordinal().keys().cloned().collect::<Vec<String>>().join("|")
+    );
     return Regex::new(&format!("{}\\z", pattern)).expect("Failed to compile regex");
 }
 
 fn unit() -> Vec<String> {
-    return vec!["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    return vec![
+        "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn teen() -> Vec<String> {
@@ -2412,29 +2420,20 @@ fn teen() -> Vec<String> {
         "sixteen",
         "seventeen",
         "eighteen",
-        "nineteen"
+        "nineteen",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn ten() -> Vec<String> {
     return vec![
-        "",
-        "",
-        "twenty",
-        "thirty",
-        "forty",
-        "fifty",
-        "sixty",
-        "seventy",
-        "eighty",
-        "ninety"
+        "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn mill() -> Vec<String> {
@@ -2450,11 +2449,11 @@ fn mill() -> Vec<String> {
         " septillion",
         " octillion",
         " nonillion",
-        " decillion"
+        " decillion",
     ]
-        .iter()
-        .map(|s| s.to_string())
-        .collect();
+    .iter()
+    .map(|s| s.to_string())
+    .collect();
 }
 
 fn def_classical() -> HashMap<String, bool> {
@@ -2464,11 +2463,11 @@ fn def_classical() -> HashMap<String, bool> {
         ("herd", false),
         ("names", true),
         ("persons", false),
-        ("ancient", false)
+        ("ancient", false),
     ]
-        .iter()
-        .map(|&(k, v)| (k.to_string(), v))
-        .collect();
+    .iter()
+    .map(|&(k, v)| (k.to_string(), v))
+    .collect();
 }
 
 pub fn all_classical() -> HashMap<String, bool> {
@@ -2493,7 +2492,9 @@ fn string_to_constant() -> HashMap<String, Option<bool>> {
         .collect();
 }
 
-fn dollar_digits() -> Regex { Regex::new("\\$(\\d+)").expect("Failed to compile Regex") }
+fn dollar_digits() -> Regex {
+    Regex::new("\\$(\\d+)").expect("Failed to compile Regex")
+}
 
 // TODO: Pre-compiled REGEX objects, ln1950 @ og inflect
 
@@ -2501,7 +2502,7 @@ pub struct Words {
     pub lowered: String,
     pub split_: Vec<String>,
     pub first: String,
-    pub last: String
+    pub last: String,
 }
 
 impl Words {
@@ -2511,7 +2512,7 @@ impl Words {
             lowered: s.to_lowercase(),
             split_: split.clone(),
             first: split.get(0).cloned().unwrap_or_else(String::new),
-            last: split.last().cloned().unwrap_or_else(String::new)
+            last: split.last().cloned().unwrap_or_else(String::new),
         }
     }
 }
@@ -2562,7 +2563,7 @@ impl Engine {
         }
     }
 
-    fn checkpat(self, pattern: Option<Word>) {
+    fn checkpat(self, _pattern: Option<Word>) {
         return;
     }
 
@@ -2572,11 +2573,13 @@ impl Engine {
         }
     }
 
-    pub fn check_gender(&self) -> &String { &self.the_gender }
+    pub fn check_gender(&self) -> &String {
+        &self.the_gender
+    }
 
     pub fn get_count<T: Into<IntOrString>>(&self, count: Option<T>) -> i32 {
-       if count.is_none() {
-            if self.persistent_count.is_some() { 
+        if count.is_none() {
+            if self.persistent_count.is_some() {
                 return self.persistent_count.unwrap();
             } else {
                 return 0;
@@ -2587,8 +2590,10 @@ impl Engine {
         match c {
             IntOrString::Int(n) => return n,
             IntOrString::Str(s) => {
-                if pl_count_one().contains(&s) ||
-                    (*self.classical_dict.get("zero").unwrap_or(&false) && pl_count_zero().contains(&s.to_lowercase())) {
+                if pl_count_one().contains(&s)
+                    || (*self.classical_dict.get("zero").unwrap_or(&false)
+                        && pl_count_zero().contains(&s.to_lowercase()))
+                {
                     return 1;
                 } else {
                     return 2;
@@ -2604,13 +2609,19 @@ enum IntOrString {
 }
 
 impl From<i32> for IntOrString {
-    fn from(n: i32) -> Self { IntOrString::Int(n) }
+    fn from(n: i32) -> Self {
+        IntOrString::Int(n)
+    }
 }
 
 impl From<String> for IntOrString {
-    fn from(s: String) -> Self { IntOrString::Str(s) }
+    fn from(s: String) -> Self {
+        IntOrString::Str(s)
+    }
 }
 
 impl From<&str> for IntOrString {
-    fn from(s: &str) -> Self { IntOrString::Str(s.to_string()) }
+    fn from(s: &str) -> Self {
+        IntOrString::Str(s.to_string())
+    }
 }
