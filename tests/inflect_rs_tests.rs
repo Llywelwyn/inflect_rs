@@ -85,7 +85,7 @@ fn test_words() {
 #[test]
 fn test_word() {
     let word = Word::new(String::from("fox"));
-    assert_eq!(word.unwrap().get(), "fox");
+    assert_eq!(word.expect("Failed to unwrap Word").get(), "fox");
 }
 
 #[test]

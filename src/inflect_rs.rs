@@ -2518,7 +2518,8 @@ impl Words {
 }
 
 // FIXME: This is terrible. Placeholder.
-pub struct Word(pub String);
+#[derive(Debug, Clone)]
+pub struct Word(String);
 
 impl Word {
     pub fn new(word: String) -> Result<Self, &'static str> {
@@ -2563,8 +2564,85 @@ impl Engine {
         }
     }
 
-    fn checkpat(self, _pattern: Option<Word>) {
-        return;
+    fn _number_args(&self) -> Option<&HashMap<String, String>> {
+        self._number_args.as_ref()
+    }
+
+    fn set_number_args(&mut self, args: Option<HashMap<String, String>>) {
+        self._number_args = args;
+    }
+
+    fn defnoun(&mut self, singular: &Option<Word>, plural: &Option<Word>) {
+        self.checkpat(singular);
+        self.checkpatplural(plural);
+        self.pl_sb_user_defined
+            .extend(vec![singular.clone(), plural.clone()]);
+        self.si_sb_user_defined
+            .extend(vec![plural.clone(), singular.clone()]);
+    }
+
+    fn defverb(
+        &mut self,
+        singular_1st: &Option<Word>,
+        singular_2nd: &Option<Word>,
+        singular_3rd: &Option<Word>,
+        plural_1st: &Option<Word>,
+        plural_2nd: &Option<Word>,
+        plural_3rd: &Option<Word>,
+    ) {
+        self.checkpat(singular_1st);
+        self.checkpat(singular_2nd);
+        self.checkpat(singular_3rd);
+        self.checkpat(plural_1st);
+        self.checkpat(plural_2nd);
+        self.checkpat(plural_3rd);
+        self.pl_v_user_defined.extend(vec![
+            singular_1st.clone(),
+            singular_2nd.clone(),
+            singular_3rd.clone(),
+            plural_1st.clone(),
+            plural_2nd.clone(),
+            plural_3rd.clone(),
+        ]);
+    }
+
+    fn defadj(&mut self, singular: &Option<Word>, plural: &Option<Word>) {
+        self.checkpat(singular);
+        self.checkpatplural(plural);
+        self.pl_adj_user_defined
+            .extend(vec![singular.clone(), plural.clone()]);
+    }
+
+    fn defa(&mut self, pattern: &Option<Word>) {
+        self.checkpat(pattern);
+        self.a_a_user_defined.extend(vec![
+            pattern.clone(),
+            Some(Word::new(String::from("a")).expect("Failed to make Word")),
+        ]);
+    }
+
+    fn defan(&mut self, pattern: &Option<Word>) {
+        self.checkpat(pattern);
+        self.a_a_user_defined.extend(vec![
+            pattern.clone(),
+            Some(Word::new(String::from("an")).expect("Failed to make Word")),
+        ]);
+    }
+
+    fn checkpat(&self, pattern: &Option<Word>) {
+        if pattern.is_none() {
+            return;
+        }
+
+        if pattern.is_some() {
+            let word = pattern.clone().expect("Failed to unwrap Word");
+            let _re = Regex::new(word.get()).expect("Failed to compile regex");
+        }
+    }
+
+    // TODO: Check for replace pattern.
+    fn checkpatplural(&self, pattern: &Option<Word>) {
+        self.checkpat(pattern);
     }
 
     pub fn gender(&mut self, gender: &str) {
